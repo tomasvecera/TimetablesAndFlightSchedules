@@ -1,0 +1,66 @@
+﻿@*@model RouteVehicleTicketViewModel*@
+@model Route
+
+@{
+    ViewData["Title"] = "Route - Create";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label class="form-label">From</label>
+        <input class="form-control" asp-for="From">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">To</label>
+        <input class="form-control" asp-for="To">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date</label>
+        <input class="form-control" asp-for="Date" placeholder="dd.mm.yyyy">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">DepartureTime</label>
+        <input class="form-control" asp-for="DepartureTime" placeholder="hh:mm">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">ArrivalTime</label>
+        <input class="form-control" asp-for="ArrivalTime" placeholder="hh:mm">
+    </div>
+    @*<div>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            @{
+                if (Model != null && Model.Vehicles != null && Model.Vehicles.Count > 0)
+                {
+                    for (int i = 0; i < Model.Vehicles.Count; i++) 
+                    {
+                        <option value=i>@Model.Vehicles[i].VehicleType</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+
+
+    @*<div>
+        <input type="text" list="cars" />
+        <datalist id="cars">
+            <option>Volvo</option>
+            <option>Saab</option>
+            <option>Mercedes</option>
+            <option>Audi</option>
+        </datalist>
+    </div>*@
+    <div class="mb-3">
+        <label class="form-label">Vehicle</label>
+        <input class="form-control" asp-for="Vehicle">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ticket</label>
+        <input class="form-control" asp-for="Ticket">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,125 @@
+﻿@*@model EveryEntityViewModel
+
+@{
+    ViewData["Title"] = "Administration Page";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="dropdown">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Administrate Entities
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-area="Admin" asp-controller="AdminPage" asp-action="Index">Main Page</a></li>
+        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Route" asp-action="Index">Route Administration</a></li>
+        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Vehicle Administration</a></li>
+        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ticket" asp-action="Index">Ticket Administration</a></li>
+        <li><a class="dropdown-item" asp-area="Admin" asp-controller="EveryEntity" asp-action="Index">All Entities Administration</a></li>
+    </ul>
+</div>
+
+<a asp-area="Admin" asp-controller="Vehicle" asp-action="Create">Create Vehicle</a>
+@{
+    if (Model != null && Model.Vehicles != null && Model.Vehicles.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">@nameof(Vehicle.Id)</th>
+                    <th scope="col">@nameof(Vehicle.VehicleType)</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Vehicles.Count; ++i)
+                {
+                    <tr>
+                        <th scope="row">@Model.Vehicles[i].Id</th>
+                        <td>@Model.Vehicles[i].VehicleType</td>
+                        <td><a asp-action="Delete" asp-route-Id="@Model.Vehicles[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
+                        <td><a asp-action="Edit" asp-route-Id="@Model.Vehicles[i].Id">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+<a asp-area="Admin" asp-controller="Ticket" asp-action="Create">Create Ticket</a>
+@{
+    if (Model != null && Model.Tickets != null && Model.Tickets.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">@nameof(Ticket.Id)</th>
+                    <th scope="col">@nameof(Ticket.Price)</th>
+                    <th scope="col">@nameof(Ticket.NumberOfTickets)</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Tickets.Count; ++i)
+                {
+                    <tr>
+                        <th scope="row">@Model.Tickets[i].Id</th>
+                        <td>@Model.Tickets[i].Price</td>
+                        <td>@Model.Tickets[i].NumberOfTickets</td>
+                        <td><a asp-action="Delete" asp-route-Id="@Model.Tickets[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
+                        <td><a asp-action="Edit" asp-route-Id="@Model.Tickets[i].Id">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+<a asp-area="Admin" asp-controller="Route" asp-action="Create">Create Route</a>
+@{
+    if (Model != null && Model.Routes != null && Model.Routes.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">@nameof(Route.Id)</th>
+                    <th scope="col">@nameof(Route.Date)</th>
+                    <th scope="col">@nameof(Route.DepartureTime)</th>
+                    <th scope="col">@nameof(Route.ArrivalTime)</th>
+                    <th scope="col">@nameof(Route.TravelTime)</th>
+                    <th scope="col">@nameof(Route.To)</th>
+                    <th scope="col">@nameof(Route.From)</th>
+                    <th scope="col">@nameof(Route.Ticket)</th>
+                    <th scope="col">@nameof(Route.Vehicle)</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Tickets.Count; ++i)
+                {
+                    <tr>
+                        <th scope="row">@Model.Routes[i].Id</th>
+                        <td>@Model.Routes[i].Date</td>
+                        <td>@Model.Routes[i].DepartureTime</td>
+                        <td>@Model.Routes[i].ArrivalTime</td>
+                        <td>@Model.Routes[i].TravelTime</td>
+                        <td>@Model.Routes[i].To</td>
+                        <td>@Model.Routes[i].From</td>
+                        <td>@Model.Routes[i].Ticket</td>
+                        <td>@Model.Routes[i].Vehicle</td>
+                        <td><a asp-action="Delete" asp-route-Id="@Model.Routes[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
+                        <td><a asp-action="Edit" asp-route-Id="@Model.Routes[i].Id">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@section Scripts
+    {
+    <script src="~/js/dialogs.js"></script>
+}*@
