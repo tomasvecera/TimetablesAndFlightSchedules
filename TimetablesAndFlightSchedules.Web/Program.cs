@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRouteAdminService, RouteAdminDFakeService>();
 builder.Services.AddScoped<IVehicleAdminService, VehicleAdminDFakeService>();
 builder.Services.AddScoped<ITicketAdminService, TicketAdminDFakeService>();
+builder.Services.AddScoped<ICityAdminService, CityAdminDFakeService>();
 
 var app = builder.Build();
 

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Web", "UTB.Eshop.Web\TimetablesAndFlightSchedules.Web.csproj", "{59F11968-B623-4A47-8C3E-F89FF1018EA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Web", "TimetablesAndFlightSchedules.Web\TimetablesAndFlightSchedules.Web.csproj", "{59F11968-B623-4A47-8C3E-F89FF1018EA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Domain", "UTB.Eshop.Domain\TimetablesAndFlightSchedules.Domain.csproj", "{D237DFB5-161C-47CD-998E-7CC15F3A6D08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Domain", "TimetablesAndFlightSchedules.Domain\TimetablesAndFlightSchedules.Domain.csproj", "{D237DFB5-161C-47CD-998E-7CC15F3A6D08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Infrastructure", "UTB.Eshop.Infrastructure\TimetablesAndFlightSchedules.Infrastructure.csproj", "{9F2FACC2-DE6F-40F5-BEBA-CF89D18F05D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Infrastructure", "TimetablesAndFlightSchedules.Infrastructure\TimetablesAndFlightSchedules.Infrastructure.csproj", "{9F2FACC2-DE6F-40F5-BEBA-CF89D18F05D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Application", "UTB.Eshop.Application\TimetablesAndFlightSchedules.Application.csproj", "{B31FD9C4-80C5-4E17-BCC7-5924AFAC9EA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Application", "TimetablesAndFlightSchedules.Application\TimetablesAndFlightSchedules.Application.csproj", "{B31FD9C4-80C5-4E17-BCC7-5924AFAC9EA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Tests", "UTB.Eshop.Tests\TimetablesAndFlightSchedules.Tests.csproj", "{8CC59964-70B3-4475-A46C-1B0350FCED20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetablesAndFlightSchedules.Tests", "TimetablesAndFlightSchedules.Tests\TimetablesAndFlightSchedules.Tests.csproj", "{8CC59964-70B3-4475-A46C-1B0350FCED20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

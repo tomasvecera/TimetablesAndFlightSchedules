@@ -9,7 +9,7 @@ namespace TimetablesAndFlightSchedules.Application.ViewModels
 {
     public class CarouselRouteViewModel
     {
-        public IList<Carousel> Carousels { get; set; }
-        public IList<Route> Routes { get; set; }
+        public IList<Carousel>? Carousels { get; set; }
+        public IList<Route>? Routes { get; set; }
     }
 }

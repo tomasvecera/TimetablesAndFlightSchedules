@@ -1,15 +1,16 @@
-﻿@model Vehicle
+﻿@model City
 
 @{
-    ViewData["Title"] = "Vehicle - Create";
+    ViewData["Title"] = "City - Create";
 }
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="Create" method="post">
     <div class="mb-3">
-        <label class="form-label">Vehicle Type
+        <label class="form-label">
+            Name
         </label>
-        <input class="form-control" asp-for="VehicleType">
+        <input class="form-control" asp-for="Name">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

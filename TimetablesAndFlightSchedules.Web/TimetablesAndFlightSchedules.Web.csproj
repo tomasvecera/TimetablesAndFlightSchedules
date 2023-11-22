@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UTB.Eshop.Application\TimetablesAndFlightSchedules.Application.csproj" />
-    <ProjectReference Include="..\UTB.Eshop.Domain\TimetablesAndFlightSchedules.Domain.csproj" />
-    <ProjectReference Include="..\UTB.Eshop.Infrastructure\TimetablesAndFlightSchedules.Infrastructure.csproj" />
+    <None Remove="Areas\Admin\Controllers\CityController.cs~RFf3990cb.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TimetablesAndFlightSchedules.Application\TimetablesAndFlightSchedules.Application.csproj" />
+    <ProjectReference Include="..\TimetablesAndFlightSchedules.Domain\TimetablesAndFlightSchedules.Domain.csproj" />
+    <ProjectReference Include="..\TimetablesAndFlightSchedules.Infrastructure\TimetablesAndFlightSchedules.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

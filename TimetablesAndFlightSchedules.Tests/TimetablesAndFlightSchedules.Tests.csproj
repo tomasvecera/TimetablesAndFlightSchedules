@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UTB.Eshop.Web\TimetablesAndFlightSchedules.Web.csproj" />
+    <ProjectReference Include="..\TimetablesAndFlightSchedules.Web\TimetablesAndFlightSchedules.Web.csproj" />
   </ItemGroup>
 
 </Project>

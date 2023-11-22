@@ -33,6 +33,17 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             return vehicles;
         }
 
+        public IList<City> GetCities()
+        {
+            IList<City> cities = new List<City>();
+            cities.Add(new City()
+            {
+                Id = 1,
+                Name = "Zlin",
+            });
+            return cities;
+        }
+
         public IList<Route> GetRoutes()
         {
             IList<Route> products = new List<Route>();
@@ -43,8 +54,8 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(15, 30),
                 ArrivalTime = new TimeOnly(18, 00),
                 TravelTime = new TimeSpan(2, 30, 0),
-                To = "Praha",
-                From = "Brno",
+                //To = "Praha",
+                //From = "Brno",
                 //Ticket = GetTickets()[0],
                 //Ticket = new Ticket() { Id = 1, NumberOfTickets = 60, Price = 50 },
                 //Vehicle = vehicles,

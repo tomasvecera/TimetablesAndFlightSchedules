@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace TimetablesAndFlightSchedules.Domain.Entities
 {
-    public abstract class Entity
+    public class City : Entity
     {
-        [Key]
         [Required]
-        public int Id { get; set; }
+        public string? Name { get; set; }
     }
 }

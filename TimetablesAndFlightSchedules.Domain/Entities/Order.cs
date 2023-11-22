@@ -10,16 +10,19 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
 {
     public class Order : Entity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateTimeCreated { get; protected set; }
 
-        public string OrderNumber { get; set; }
+        [Required]
+        public string? OrderNumber { get; set; }
 
+        [Required]
         public double TotalPrice { get; set; }
 
         public int UserId { get; set; }
 
         //public User User { get; set; }
 
-        public IList<OrderItem> OrderItems { get; set; }
+        public IList<OrderItem>? OrderItems { get; set; }
     }
 }

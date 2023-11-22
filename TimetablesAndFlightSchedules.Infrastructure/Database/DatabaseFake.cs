@@ -16,6 +16,8 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
 
         public static IList<Ticket> Tickets { get; set; }
 
+        public static IList<City> Cities { get; set; }
+
         public static IList<Carousel> Carousels { get; set; }
 
         static DatabaseFake()
@@ -24,6 +26,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             Routes = dbInit.GetRoutes();
             Tickets = dbInit.GetTickets();
             Vehicles = dbInit.GetVehicles();
+            Cities = dbInit.GetCities();
             Carousels = dbInit.GetCarousels();
 
             /*Products = new List<Product>();

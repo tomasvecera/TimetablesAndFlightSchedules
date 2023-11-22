@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UTB.Eshop.Domain\TimetablesAndFlightSchedules.Domain.csproj" />
-    <ProjectReference Include="..\UTB.Eshop.Infrastructure\TimetablesAndFlightSchedules.Infrastructure.csproj" />
+    <ProjectReference Include="..\TimetablesAndFlightSchedules.Domain\TimetablesAndFlightSchedules.Domain.csproj" />
+    <ProjectReference Include="..\TimetablesAndFlightSchedules.Infrastructure\TimetablesAndFlightSchedules.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
