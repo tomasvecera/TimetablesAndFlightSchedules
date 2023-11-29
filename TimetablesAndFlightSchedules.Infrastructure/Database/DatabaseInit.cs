@@ -28,7 +28,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             vehicles.Add(new Vehicle()
             {
                 Id = 1,
-                VehicleType = "Bus",
+                VehicleType = "Autobus",
             });
             return vehicles;
         }
@@ -62,18 +62,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 //Vehicle = new Vehicle() { Id = 1, VehicleType = "Bus" },
             });
             return products;
-        }
-
-        public IList<Carousel> GetCarousels()
-        {
-            IList<Carousel> carousels = new List<Carousel>();
-            carousels.Add(new Carousel()
-            {
-                Id = 2,
-                ImageSrc = "img/carousel/pic1.jpg",
-                ImageAlt = ""
-            });
-            return carousels;
         }
     }
 }

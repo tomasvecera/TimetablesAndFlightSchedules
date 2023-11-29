@@ -10,6 +10,7 @@ builder.Services.AddScoped<IRouteAdminService, RouteAdminDFakeService>();
 builder.Services.AddScoped<IVehicleAdminService, VehicleAdminDFakeService>();
 builder.Services.AddScoped<ITicketAdminService, TicketAdminDFakeService>();
 builder.Services.AddScoped<ICityAdminService, CityAdminDFakeService>();
+builder.Services.AddScoped<IHomeService, HomeDFakeService>();
 
 var app = builder.Build();
 

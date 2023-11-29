@@ -10,34 +10,21 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
 {
     public class DatabaseFake
     {
-        public static IList<Route> Routes { get; set; }
+        public static List<Route> Routes { get; set; }
 
-        public static IList<Vehicle> Vehicles { get; set; }
+        public static List<Vehicle> Vehicles { get; set; }
 
-        public static IList<Ticket> Tickets { get; set; }
+        public static List<Ticket> Tickets { get; set; }
 
-        public static IList<City> Cities { get; set; }
-
-        public static IList<Carousel> Carousels { get; set; }
+        public static List<City> Cities { get; set; }
 
         static DatabaseFake()
         {
             DatabaseInit dbInit = new DatabaseInit();
-            Routes = dbInit.GetRoutes();
-            Tickets = dbInit.GetTickets();
-            Vehicles = dbInit.GetVehicles();
-            Cities = dbInit.GetCities();
-            Carousels = dbInit.GetCarousels();
-
-            /*Products = new List<Product>();
-            Products.Add(new Product()
-            {
-                Id = 1,
-                Name = "iPhone",
-                Description = "mobilni telefon",
-                Price = 20,
-                ImageSrc = ""
-            });*/
+            Routes = dbInit.GetRoutes().ToList();
+            Tickets = dbInit.GetTickets().ToList();
+            Vehicles = dbInit.GetVehicles().ToList();
+            Cities = dbInit.GetCities().ToList();
         }
     }
 }

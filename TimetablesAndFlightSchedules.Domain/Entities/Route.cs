@@ -20,9 +20,6 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
 
         public TimeSpan TravelTime { get; set; }
 
-        //public string To { get; set; }
-        //public string From { get; set; }
-
         [Required]
         public City? From { get; set; }
 

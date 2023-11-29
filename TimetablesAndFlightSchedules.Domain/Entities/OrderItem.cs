@@ -12,20 +12,16 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
     {
         [ForeignKey(nameof(Order))]
         public int OrderID { get; set; }
+        public Order? Order { get; set; }
 
         [ForeignKey(nameof(Ticket))]
         public int TicketID { get; set; }
+        public Ticket? Ticket { get; set; }
 
         [Required]
         public int Amount { get; set; }
-        //public double Price { get; set; }
 
         [Required]
-        public int Price { get; set; }
-
-        public Order? Order { get; set; }
-        //public Product Product { get; set; }
-
-        public Ticket? Ticket { get; set; }
+        public double Price { get; set; }
     }
 }
