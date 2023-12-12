@@ -12,8 +12,8 @@
 <div class="container mt-5">
     <form>
         <div class="row">
-            <div class="form-group col-md-4">
-                <select class="form-select" aria-label="Default select example">
+            <div class="form-group col-md-2">
+                <select class="custom-select text-center" aria-label="Default select example">
                     @{
                         if (Model != null && Model.Vehicles != null && Model.Vehicles.Count != 0)
                         {
@@ -36,20 +36,46 @@
                     }
                 </select>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-auto">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                    <label class="custom-control-label" for="customControlAutosizing">Přestupy</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-auto">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Datum</div>
                     </div>
-                    <input type="date" class="form-control" name="date" id="input1" value="@DateTime.Today.ToString("yyyy-MM-dd")" @*placeholder="dd.mm.yyyy"*@>
+                    <input type="text" class="form-control" name="from">
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Datum</div>
+                    </div>
+                    <input type="text" class="form-control" name="to">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Datum</div>
+                    </div>
+                    <input type="date" class="form-control" name="date" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+            <div class="form-group col-auto">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Čas</div>
                     </div>
-                    <input type="time" class="form-control" name="time" id="input2" value="@DateTime.Now.ToString("HH:mm")">
+                    <input type="time" class="form-control" name="time" value="@DateTime.Now.ToString("HH:mm")">
                 </div>
             </div>
         </div>
@@ -57,7 +83,6 @@
             <form>
                 <div class="form-row align-items-center">
                     <div class="col-auto">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
                         <select class="custom-select mr-sm-2" name="vehicle" id="inlineFormCustomSelect">
                             @{
                                 if (Model != null && Model.Vehicles != null && Model.Vehicles.Count != 0)
@@ -81,14 +106,65 @@
                             }
                         </select>
                     </div>
-                    <div class="col-auto">
-                        <div class="custom-control custom-checkbox mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                            <label class="custom-control-label" for="customControlAutosizing">Přestupy</label>
-                        </div>
-                    </div>
                 </div>
             </form>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="d-flex justify-content-around">
+    <form>
+        <div class="row">
+            <div class="form-group col-auto">
+                <select class="custom-select" aria-label="Default select example">
+                    @{
+                        if (Model != null && Model.Vehicles != null && Model.Vehicles.Count != 0)
+                        {
+                            for (int i = 0; i < Model.Vehicles.Count; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option selected>@Model.Vehicles[i].VehicleType</option>
+                                }
+                                else
+                                {
+                                    <option>@Model.Vehicles[i].VehicleType</option>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <option disabled>No vehicles available</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group col-auto">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                    <label class="custom-control-label" for="customControlAutosizing">Přestupy</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Datum</div>
+                    </div>
+                    <input type="date" class="form-control" name="date" id="input1" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+            <div class="form-group col-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Čas</div>
+                    </div>
+                    <input type="time" class="form-control" name="time" id="input2" value="@DateTime.Now.ToString("HH:mm")">
+                </div>
+            </div>
         </div>
     </form>
 </div>
