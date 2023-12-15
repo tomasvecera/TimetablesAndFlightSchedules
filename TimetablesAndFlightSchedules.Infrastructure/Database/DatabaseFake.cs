@@ -12,6 +12,8 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
     {
         public static List<Route> Routes { get; set; }
 
+        public static List<RouteInstance> RouteInstances { get; set; }
+
         public static List<Vehicle> Vehicles { get; set; }
 
         public static List<Ticket> Tickets { get; set; }
@@ -22,6 +24,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
         {
             DatabaseInit dbInit = new DatabaseInit();
             Routes = dbInit.GetRoutes().ToList();
+            RouteInstances = dbInit.GetRouteInstances().ToList();
             Tickets = dbInit.GetTickets().ToList();
             Vehicles = dbInit.GetVehicles().ToList();
             Cities = dbInit.GetCities().ToList();

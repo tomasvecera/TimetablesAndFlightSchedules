@@ -1,0 +1,26 @@
+﻿@model RouteInstance
+
+@{
+    ViewData["Title"] = "Route Instance - Edit";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    <div class="mb-3">
+        <label class="form-label">Route</label>
+        <select class="form-control" asp-for="RouteID" asp-items="ViewBag.RouteID"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date</label>
+        <input class="form-control" asp-for="Date" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Departure Time</label>
+        <input class="form-control" asp-for="DepartureTime" type="time" value="@DateTime.Now.ToString("HH:mm")">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Arrival Time</label>
+        <input class="form-control" asp-for="ArrivalTime" type="time" value="@DateTime.Now.ToString("HH:mm")">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

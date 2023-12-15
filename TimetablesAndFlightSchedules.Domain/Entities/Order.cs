@@ -21,7 +21,7 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
 
         public int UserId { get; set; }
 
-        //public User User { get; set; }
+        //public IUser User { get; set; }
 
         public IList<OrderItem>? OrderItems { get; set; }
     }

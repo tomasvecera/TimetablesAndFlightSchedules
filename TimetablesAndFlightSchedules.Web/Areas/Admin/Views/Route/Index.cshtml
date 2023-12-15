@@ -5,19 +5,6 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-@*<div class="dropdown">
-    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Route Administration
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" asp-area="Admin" asp-controller="AdminPage" asp-action="Index">Main Page</a></li>
-        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Route" asp-action="Index">Route Administration</a></li>
-        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Vehicle Administration</a></li>
-        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ticket" asp-action="Index">Ticket Administration</a></li>
-        <li><a class="dropdown-item" asp-area="Admin" asp-controller="EveryEntity" asp-action="Index">All Entities Administration</a></li>
-    </ul>
-</div>*@
-
 <a type="button" class="btn btn-outline-primary btn-sm" asp-action="Create">Create Route</a>
 @{
     if (Model != null && Model.Count > 0)
@@ -26,14 +13,11 @@
             <thead>
                 <tr>
                     <th scope="col">@nameof(Route.Id)</th>
-                    <th scope="col">@nameof(Route.From)</th>
-                    <th scope="col">@nameof(Route.To)</th>
-                    <th scope="col">@nameof(Route.Date)</th>
-                    <th scope="col">@nameof(Route.DepartureTime)</th>
-                    <th scope="col">@nameof(Route.ArrivalTime)</th>
-                    <th scope="col">@nameof(Route.TravelTime)</th>
-                    <th scope="col">@nameof(Route.Vehicle)</th>
-                    <th scope="col">@nameof(Route.Ticket)</th>
+                    <th scope="col">@nameof(Route.CityFromID)</th>
+                    <th scope="col">@nameof(Route.CityToID)</th>
+                    <th scope="col">@nameof(Route.VehicleID)</th>
+                    @*<th scope="col">@nameof(Route.Vehicle.VehicleType)</th>*@
+                    <th scope="col">@nameof(Route.TicketID)</th>
                     <th scope="col">Delete</th>
                     <th scope="col">Edit</th>
                 </tr>
@@ -43,14 +27,12 @@
                 {
                     <tr>
                         <th scope="row">@Model[i].Id</th>
-                        <td>@Model[i].From</td>
-                        <td>@Model[i].To</td>
-                        <td>@Model[i].Date</td>
-                        <td>@Model[i].DepartureTime</td>
-                        <td>@Model[i].ArrivalTime</td>
-                        <td>@Model[i].TravelTime</td>
-                        <td>@Model[i].Vehicle</td>
-                        <td>@Model[i].Ticket</td>
+                        <td>@Model[i].CityFromID</td>
+                        <td>@Model[i].CityToID</td>
+                        <td>@Model[i].VehicleID</td>
+                        @*<td>@Model[i].Vehicle.Id</td>
+                        <td>@Model[i].Vehicle.VehicleType</td>*@ @* TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+                        <td>@Model[i].TicketID</td>
                         <td><a asp-action="Delete" asp-route-Id="@Model[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
                         <td><a asp-action="Edit" asp-route-Id="@Model[i].Id">Edit</a></td>
                     </tr>

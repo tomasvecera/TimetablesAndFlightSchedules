@@ -6,15 +6,25 @@
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="Edit" method="post">
-    <div class="mb-3">
+    @*<div class="mb-3">
         <label class="form-label">From</label>
-        <input class="form-control" asp-for="From">
+        <input class="form-control" asp-for="CityFrom">
     </div>
     <div class="mb-3">
         <label class="form-label">To</label>
-        <input class="form-control" asp-for="To">
+        <input class="form-control" asp-for="CityTo">
+    </div>*@
+
+
+    <div class="mb-3">
+        <label class="form-label">From</label>
+        <select asp-for="CityFromID" class="form-control" asp-items="ViewBag.CityFromID"></select>
     </div>
     <div class="mb-3">
+        <label class="form-label">To</label>
+        <select asp-for="CityToID" class="form-control" asp-items="ViewBag.CityToID"></select>
+    </div>
+    @*<div class="mb-3">
         <label class="form-label">Date</label>
         <input class="form-control" asp-for="Date">
     </div>
@@ -25,14 +35,14 @@
     <div class="mb-3">
         <label class="form-label">Arrival Time</label>
         <input class="form-control" asp-for="ArrivalTime">
+    </div>*@
+    <div class="mb-3">
+        <label class="form-label">@nameof(Vehicle.VehicleType)</label>
+        <select asp-for="VehicleID" class="form-control" asp-items="ViewBag.VehicleID"></select>
     </div>
     <div class="mb-3">
-        <label class="form-label">Vehicle</label>
-        <input class="form-control" asp-for="Vehicle">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Ticket</label>
-        <input class="form-control" asp-for="Ticket">
+        <label class="form-label">@nameof(Ticket.Price)</label>
+        <select asp-for="TicketID" class="form-control" asp-items="ViewBag.TicketID"></select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

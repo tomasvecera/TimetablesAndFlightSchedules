@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <th scope="col">@nameof(Ticket.Id)</th>
+                    <th scope="col">@nameof(Ticket.TicketType)</th>
                     <th scope="col">@nameof(Ticket.Price)</th>
                     <th scope="col">@nameof(Ticket.NumberOfTickets)</th>
                     <th scope="col">Delete</th>
@@ -25,6 +26,7 @@
                 {
                     <tr>
                         <th scope="row">@Model[i].Id</th>
+                        <td>@Model[i].TicketType</td>
                         <td>@Model[i].Price</td>
                         <td>@Model[i].NumberOfTickets</td>
                         <td><a asp-action="Delete" asp-route-Id="@Model[i].Id" onclick="return ConfirmDelete();">Delete</a></td>

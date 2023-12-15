@@ -26,17 +26,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Route" asp-action="Index">Routes</a>
-                        </li>*@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Administration
                             </a>
                             <ul class="dropdown-menu">
-                                @*<li><hr class="dropdown-divider"></li>*@
-                                @*<li><a class="dropdown-item" asp-area="Admin" asp-controller="AdminPage" asp-action="Index">Administration Main Page</a></li>*@
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Route" asp-action="Index">Route Administration</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="RouteInstance" asp-action="Index">Route Instance Administration</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Vehicle Administration</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ticket" asp-action="Index">Ticket Administration</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="City" asp-action="Index">City Administration</a></li>

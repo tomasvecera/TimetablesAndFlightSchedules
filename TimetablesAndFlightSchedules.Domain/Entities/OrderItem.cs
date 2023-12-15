@@ -14,9 +14,9 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
         public int OrderID { get; set; }
         public Order? Order { get; set; }
 
-        [ForeignKey(nameof(Ticket))]
-        public int TicketID { get; set; }
-        public Ticket? Ticket { get; set; }
+        [ForeignKey(nameof(RouteInstance))]
+        public int RouteInstanceID { get; set; }
+        public RouteInstance? RouteInstance { get; set; }
 
         [Required]
         public int Amount { get; set; }

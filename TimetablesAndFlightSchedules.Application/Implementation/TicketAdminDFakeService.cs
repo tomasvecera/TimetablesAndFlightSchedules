@@ -52,6 +52,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             Ticket? ticket = DatabaseFake.Tickets.FirstOrDefault(v => v.Id == ticketUpdated.Id);
             if (ticket != null)
             {
+                ticket.TicketType = ticketUpdated.TicketType;
                 ticket.Price = ticketUpdated.Price;
                 ticket.NumberOfTickets = ticketUpdated.NumberOfTickets;
             }

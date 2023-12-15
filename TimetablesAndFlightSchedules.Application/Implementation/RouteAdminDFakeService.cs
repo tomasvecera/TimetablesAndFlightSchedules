@@ -29,8 +29,10 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             }
 
             if (DatabaseFake.Routes != null)
-                route.TravelTime = route.ArrivalTime - route.DepartureTime;
+            {
+                //route.TravelTime = route.ArrivalTime - route.DepartureTime;
                 DatabaseFake.Routes.Add(route);
+            }
         }
 
         public bool Delete(int id)
@@ -53,16 +55,15 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             Route? route = DatabaseFake.Routes.FirstOrDefault(r => r.Id == routeUpdated.Id);
             if(route != null)
             {
-                route.Date = routeUpdated.Date;
-                route.DepartureTime = routeUpdated.DepartureTime;
-                route.ArrivalTime = routeUpdated.ArrivalTime;
-                route.TravelTime = routeUpdated.ArrivalTime - routeUpdated.DepartureTime;
-                route.To = routeUpdated.To;
-                route.From = routeUpdated.From;
-                route.Ticket = routeUpdated.Ticket;
-                route.Vehicle = routeUpdated.Vehicle;
+                route.CityFromID = routeUpdated.CityFromID;
+                route.CityToID = routeUpdated.CityToID;
+                route.TicketID = routeUpdated.TicketID;
+                route.VehicleID = routeUpdated.VehicleID;
+                
+                //route.CityFrom = routeUpdated.CityFrom;
+                //route.Ticket = routeUpdated.Ticket;
+                //route.Vehicle = routeUpdated.Vehicle;
             }
         }
-
     }
 }
