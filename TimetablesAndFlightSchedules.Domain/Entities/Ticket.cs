@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
     public class Ticket : Entity
     {
         [Required]
-        public string TicketType { get; set; }
+        public string? TicketType { get; set; }
 
         [Required]
         public int NumberOfTickets { get; set; }
@@ -19,3 +19,4 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
         public double Price { get; set; }
     }
 }
+*/

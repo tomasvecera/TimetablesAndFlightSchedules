@@ -9,10 +9,10 @@ namespace TimetablesAndFlightSchedules.Application.ViewModels
 {
     public class RouteVehicleTicketViewModel
     {
-        public IList<Route> Routes { get; set; }
+        public IList<Route>? Routes { get; set; }
 
-        public IList<Ticket> Tickets { get; set; }
+        public IList<Ticket>? Tickets { get; set; }
 
-        public IList<Vehicle> Vehicles { get; set; }
+        public IList<Vehicle>? Vehicles { get; set; }
     }
 }

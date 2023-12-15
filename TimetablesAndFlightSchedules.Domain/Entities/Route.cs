@@ -30,12 +30,15 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
         public int CityToID { get; set; }
         public City? CityTo { get; set; }
 
-        [ForeignKey(nameof(Ticket))]
-        public int TicketID { get; set; }
-        public Ticket? Ticket { get; set; }
+        //[ForeignKey(nameof(Ticket))]
+        //public int TicketID { get; set; }
+        //public Ticket? Ticket { get; set; }
 
         [ForeignKey(nameof(Vehicle))]
         public int VehicleID { get; set; }
         public Vehicle? Vehicle { get; set; }
+
+        [Required]
+        public double PriceOfTicket { get; set; }
     }
 }
