@@ -55,6 +55,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                 //DatabaseFake.Routes.Remove(oldRoute);
                 //DatabaseFake.Routes.Insert(route.Id - 1, route);
                 vehicle.VehicleType = vehicleUpdated.VehicleType;
+                vehicle.NumberOfTickets = vehicleUpdated.NumberOfTickets;
             }
         }
 

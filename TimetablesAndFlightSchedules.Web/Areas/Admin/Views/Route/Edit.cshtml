@@ -19,10 +19,12 @@
     <div class="mb-3">
         <label class="form-label">From</label>
         <select asp-for="CityFromID" class="form-control" asp-items="ViewBag.CityFromID"></select>
+        <span asp-validation-for="CityFromID" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label class="form-label">To</label>
         <select asp-for="CityToID" class="form-control" asp-items="ViewBag.CityToID"></select>
+        <span asp-validation-for="CityToID" class="text-danger"></span>
     </div>
     @*<div class="mb-3">
         <label class="form-label">Date</label>
@@ -39,10 +41,21 @@
     <div class="mb-3">
         <label class="form-label">@nameof(Vehicle.VehicleType)</label>
         <select asp-for="VehicleID" class="form-control" asp-items="ViewBag.VehicleID"></select>
+        <span asp-validation-for="VehicleID" class="text-danger"></span>
     </div>
-    <div class="mb-3">
+    @*<div class="mb-3">
         <label class="form-label">@nameof(Ticket.Price)</label>
         <select asp-for="TicketID" class="form-control" asp-items="ViewBag.TicketID"></select>
+    </div>*@
+    <div class="mb-3">
+        <label class="form-label">Price of Ticket</label>
+        <input asp-for="PriceOfTicket" class="form-control">
+        <span asp-validation-for="PriceOfTicket" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

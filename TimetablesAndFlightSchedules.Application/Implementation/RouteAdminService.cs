@@ -58,8 +58,9 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             {
                 route.CityFromID = routeUpdated.CityFromID;
                 route.CityToID = routeUpdated.CityToID;
-                route.TicketID = routeUpdated.TicketID;
+                //route.TicketID = routeUpdated.TicketID;
                 route.VehicleID = routeUpdated.VehicleID;
+                route.PriceOfTicket = routeUpdated.PriceOfTicket;
 
                 _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 //route.CityFrom = routeUpdated.CityFrom;

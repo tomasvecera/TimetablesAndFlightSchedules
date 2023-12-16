@@ -14,7 +14,7 @@
         <div class="row">
             <div class="form-group col-md-2">
                 <select class="custom-select text-center" aria-label="Default select example">
-                    @{
+                    @*@{
                         if (Model != null && Model.Vehicles != null && Model.Vehicles.Count != 0)
                         {
                             for (int i = 0; i < Model.Vehicles.Count; i++)
@@ -33,7 +33,11 @@
                         {
                             <option disabled>No vehicles available</option>
                         }
-                    }
+                    }*@
+                    <option selected>Autobusy</option>
+                    <option>Vlaky</option>
+                    <option>Autobusy a Vlaky</option>
+                    <option>Letadla</option>
                 </select>
             </div>
             <div class="col-auto">

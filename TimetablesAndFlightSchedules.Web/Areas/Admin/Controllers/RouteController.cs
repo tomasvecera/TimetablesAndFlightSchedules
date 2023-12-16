@@ -12,14 +12,14 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         IRouteAdminService _routeService;
         IVehicleAdminService _vehicleService;
         ICityAdminService _cityService;
-        ITicketAdminService _ticketService;
+        //ITicketAdminService _ticketService;
         
-        public RouteController(IRouteAdminService routeService, IVehicleAdminService vehicleAdminService, ICityAdminService cityService, ITicketAdminService ticketService)
+        public RouteController(IRouteAdminService routeService, IVehicleAdminService vehicleAdminService, ICityAdminService cityService/*, ITicketAdminService ticketService*/)
         {
             _routeService = routeService;
             _vehicleService = vehicleAdminService;
             _cityService = cityService;
-            _ticketService = ticketService;
+            //_ticketService = ticketService;
         }
             
         public IActionResult Index()
@@ -103,8 +103,8 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
             ViewData[nameof(Domain.Entities.Route.CityFromID)] = new SelectList(citiesFrom, nameof(City.Id), nameof(City.Name));
             IList<City> citiesTo = _cityService.Select();
             ViewData[nameof(Domain.Entities.Route.CityToID)] = new SelectList(citiesTo, nameof(City.Id), nameof(City.Name));
-            IList<Ticket> tickets = _ticketService.Select();
-            ViewData[nameof(Domain.Entities.Route.TicketID)] = new SelectList(tickets, nameof(Ticket.Id), nameof(Ticket.Price));
+            //IList<Ticket> tickets = _ticketService.Select();
+            //ViewData[nameof(Domain.Entities.Route.TicketID)] = new SelectList(tickets, nameof(Ticket.Id), nameof(Ticket.Price));
         }
     }
 }

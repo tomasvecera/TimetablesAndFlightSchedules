@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using TimetablesAndFlightSchedules.Application.Abstraction;
 using TimetablesAndFlightSchedules.Domain.Entities;
 using TimetablesAndFlightSchedules.Infrastructure.Database;
@@ -30,9 +31,19 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Vehicle vehicle)
         {
-            _vehicleService.Create(vehicle);
+            if (ModelState.IsValid)
+            {
+                _vehicleService.Create(vehicle);
+                return RedirectToAction(nameof(RouteController.Index));
+            }
+            else
+            {
+                return View(vehicle);
+            }
 
-            return RedirectToAction(nameof(RouteController.Index));
+            //_vehicleService.Create(vehicle);
+
+            //return RedirectToAction(nameof(RouteController.Index));
         }
 
         public IActionResult Delete(int Id)
@@ -61,8 +72,18 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Vehicle vehicle)
         {
-            _vehicleService.Edit(vehicle);
-            return RedirectToAction(nameof(RouteController.Index));
+            if (ModelState.IsValid)
+            {
+                _vehicleService.Edit(vehicle);
+                return RedirectToAction(nameof(RouteController.Index));
+            }
+            else
+            {
+                return View(vehicle);
+            }
+
+            //_vehicleService.Edit(vehicle);
+            //return RedirectToAction(nameof(RouteController.Index));
         }
     }
 }

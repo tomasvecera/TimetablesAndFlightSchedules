@@ -57,6 +57,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             if (vehicle != null)
             {
                 vehicle.VehicleType = vehicleUpdated.VehicleType;
+                vehicle.NumberOfTickets = vehicleUpdated.NumberOfTickets;
 
                 _timetablesAndFlightSchedulesDbContext.SaveChanges();
             }

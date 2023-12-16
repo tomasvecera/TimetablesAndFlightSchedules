@@ -43,6 +43,21 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         {
                             Id = 2,
                             Name = "Brno"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Uherske Hradiste"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Praha"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Rim"
                         });
                 });
 
@@ -110,8 +125,8 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                     b.Property<int>("CityToID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TicketID")
-                        .HasColumnType("int");
+                    b.Property<double>("PriceOfTicket")
+                        .HasColumnType("double");
 
                     b.Property<int>("VehicleID")
                         .HasColumnType("int");
@@ -122,8 +137,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
 
                     b.HasIndex("CityToID");
 
-                    b.HasIndex("TicketID");
-
                     b.HasIndex("VehicleID");
 
                     b.ToTable("Routes");
@@ -132,10 +145,34 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CityFromID = 0,
-                            CityToID = 0,
-                            TicketID = 0,
-                            VehicleID = 0
+                            CityFromID = 1,
+                            CityToID = 2,
+                            PriceOfTicket = 120.0,
+                            VehicleID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CityFromID = 1,
+                            CityToID = 2,
+                            PriceOfTicket = 140.0,
+                            VehicleID = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CityFromID = 3,
+                            CityToID = 1,
+                            PriceOfTicket = 45.0,
+                            VehicleID = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CityFromID = 4,
+                            CityToID = 5,
+                            PriceOfTicket = 2000.0,
+                            VehicleID = 3
                         });
                 });
 
@@ -171,40 +208,28 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         {
                             Id = 1,
                             ArrivalTime = new TimeOnly(18, 0, 0),
-                            Date = new DateOnly(2024, 1, 28),
+                            Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(15, 30, 0),
-                            RouteID = 0,
+                            RouteID = 1,
                             TravelTime = new TimeSpan(0, 2, 30, 0, 0)
-                        });
-                });
-
-            modelBuilder.Entity("TimetablesAndFlightSchedules.Domain.Entities.Ticket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfTickets")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double");
-
-                    b.Property<string>("TicketType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tickets");
-
-                    b.HasData(
+                        },
                         new
                         {
-                            Id = 1,
-                            NumberOfTickets = 50,
-                            Price = 45.0,
-                            TicketType = "Autobus classic"
+                            Id = 2,
+                            ArrivalTime = new TimeOnly(18, 0, 0),
+                            Date = new DateOnly(2024, 1, 27),
+                            DepartureTime = new TimeOnly(15, 30, 0),
+                            RouteID = 1,
+                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArrivalTime = new TimeOnly(18, 0, 0),
+                            Date = new DateOnly(2024, 1, 28),
+                            DepartureTime = new TimeOnly(15, 30, 0),
+                            RouteID = 1,
+                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         });
                 });
 
@@ -212,6 +237,9 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfTickets")
                         .HasColumnType("int");
 
                     b.Property<string>("VehicleType")
@@ -226,12 +254,20 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
+                            NumberOfTickets = 50,
                             VehicleType = "Autobus"
                         },
                         new
                         {
                             Id = 2,
+                            NumberOfTickets = 100,
                             VehicleType = "Vlak"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NumberOfTickets = 200,
+                            VehicleType = "Letadlo A320"
                         });
                 });
 
@@ -268,12 +304,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimetablesAndFlightSchedules.Domain.Entities.Ticket", "Ticket")
-                        .WithMany()
-                        .HasForeignKey("TicketID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TimetablesAndFlightSchedules.Domain.Entities.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleID")
@@ -283,8 +313,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                     b.Navigation("CityFrom");
 
                     b.Navigation("CityTo");
-
-                    b.Navigation("Ticket");
 
                     b.Navigation("Vehicle");
                 });

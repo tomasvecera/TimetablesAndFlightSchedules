@@ -13,7 +13,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
         public DbSet<City> Cities { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<RouteInstance> RouteInstances { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
+        //public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
         public DbSet<Order> Orders { get; set; }
@@ -31,7 +31,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             modelBuilder.Entity<City>().HasData(dbInit.GetCities());
             modelBuilder.Entity<Route>().HasData(dbInit.GetRoutes());
             modelBuilder.Entity<RouteInstance>().HasData(dbInit.GetRouteInstances());
-            modelBuilder.Entity<Ticket>().HasData(dbInit.GetTickets());
+            //modelBuilder.Entity<Ticket>().HasData(dbInit.GetTickets());
             modelBuilder.Entity<Vehicle>().HasData(dbInit.GetVehicles());
         }
     }

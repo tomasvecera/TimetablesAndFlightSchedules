@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using TimetablesAndFlightSchedules.Application.Abstraction;
 using TimetablesAndFlightSchedules.Domain.Entities;
 using TimetablesAndFlightSchedules.Infrastructure.Database;
@@ -66,3 +66,4 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         }
     }
 }
+*/

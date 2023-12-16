@@ -21,7 +21,6 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
 
         public TimeSpan TravelTime { get; set; }*/
 
-
         [ForeignKey(nameof(CityFrom))]
         public int CityFromID { get; set; }
         public City? CityFrom { get; set; }

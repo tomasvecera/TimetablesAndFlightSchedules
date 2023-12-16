@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using TimetablesAndFlightSchedules.Application.Abstraction;
 using TimetablesAndFlightSchedules.Domain.Entities;
 using TimetablesAndFlightSchedules.Infrastructure.Database;
@@ -30,9 +31,20 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(City city)
         {
-            _cityService.Create(city);
+            if (ModelState.IsValid)
+            {
+                _cityService.Create(city);
+                return RedirectToAction(nameof(RouteController.Index));
+            }
+            else
+            {
+                return View(city);
+            }
 
-            return RedirectToAction(nameof(RouteController.Index));
+
+            //_cityService.Create(city);
+
+            //return RedirectToAction(nameof(RouteController.Index));
         }
 
         public IActionResult Delete(int Id)
@@ -61,8 +73,18 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(City city)
         {
-            _cityService.Edit(city);
-            return RedirectToAction(nameof(RouteController.Index));
+            if (ModelState.IsValid)
+            {
+                _cityService.Edit(city);
+                return RedirectToAction(nameof(RouteController.Index));
+            }
+            else
+            {
+                return View(city);
+            }
+
+            //_cityService.Edit(city);
+            //return RedirectToAction(nameof(RouteController.Index));
         }
     }
 }

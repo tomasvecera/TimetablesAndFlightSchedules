@@ -52,30 +52,14 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Tickets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TicketType = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    NumberOfTickets = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<double>(type: "double", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tickets", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Vehicles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     VehicleType = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NumberOfTickets = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,8 +75,8 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CityFromID = table.Column<int>(type: "int", nullable: false),
                     CityToID = table.Column<int>(type: "int", nullable: false),
-                    TicketID = table.Column<int>(type: "int", nullable: false),
-                    VehicleID = table.Column<int>(type: "int", nullable: false)
+                    VehicleID = table.Column<int>(type: "int", nullable: false),
+                    PriceOfTicket = table.Column<double>(type: "double", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,12 +91,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         name: "FK_Routes_Cities_CityToID",
                         column: x => x.CityToID,
                         principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Routes_Tickets_TicketID",
-                        column: x => x.TicketID,
-                        principalTable: "Tickets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -183,31 +161,41 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                 values: new object[,]
                 {
                     { 1, "Zlin" },
-                    { 2, "Brno" }
+                    { 2, "Brno" },
+                    { 3, "Uherske Hradiste" },
+                    { 4, "Praha" },
+                    { 5, "Rim" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Vehicles",
+                columns: new[] { "Id", "NumberOfTickets", "VehicleType" },
+                values: new object[,]
+                {
+                    { 1, 50, "Autobus" },
+                    { 2, 100, "Vlak" },
+                    { 3, 200, "Letadlo A320" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Routes",
+                columns: new[] { "Id", "CityFromID", "CityToID", "PriceOfTicket", "VehicleID" },
+                values: new object[,]
+                {
+                    { 1, 1, 2, 120.0, 1 },
+                    { 2, 1, 2, 140.0, 2 },
+                    { 3, 3, 1, 45.0, 1 },
+                    { 4, 4, 5, 2000.0, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "RouteInstances",
                 columns: new[] { "Id", "ArrivalTime", "Date", "DepartureTime", "RouteID", "TravelTime" },
-                values: new object[] { 1, new TimeOnly(18, 0, 0), new DateOnly(2024, 1, 28), new TimeOnly(15, 30, 0), 0, new TimeSpan(0, 2, 30, 0, 0) });
-
-            migrationBuilder.InsertData(
-                table: "Routes",
-                columns: new[] { "Id", "CityFromID", "CityToID", "TicketID", "VehicleID" },
-                values: new object[] { 1, 0, 0, 0, 0 });
-
-            migrationBuilder.InsertData(
-                table: "Tickets",
-                columns: new[] { "Id", "NumberOfTickets", "Price", "TicketType" },
-                values: new object[] { 1, 50, 45.0, "Autobus classic" });
-
-            migrationBuilder.InsertData(
-                table: "Vehicles",
-                columns: new[] { "Id", "VehicleType" },
                 values: new object[,]
                 {
-                    { 1, "Autobus" },
-                    { 2, "Vlak" }
+                    { 1, new TimeOnly(18, 0, 0), new DateOnly(2024, 1, 26), new TimeOnly(15, 30, 0), 1, new TimeSpan(0, 2, 30, 0, 0) },
+                    { 2, new TimeOnly(18, 0, 0), new DateOnly(2024, 1, 27), new TimeOnly(15, 30, 0), 1, new TimeSpan(0, 2, 30, 0, 0) },
+                    { 3, new TimeOnly(18, 0, 0), new DateOnly(2024, 1, 28), new TimeOnly(15, 30, 0), 1, new TimeSpan(0, 2, 30, 0, 0) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -236,11 +224,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                 column: "CityToID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Routes_TicketID",
-                table: "Routes",
-                column: "TicketID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Routes_VehicleID",
                 table: "Routes",
                 column: "VehicleID");
@@ -263,9 +246,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cities");
-
-            migrationBuilder.DropTable(
-                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");

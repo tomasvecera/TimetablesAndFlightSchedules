@@ -11,7 +11,7 @@ namespace TimetablesAndFlightSchedules.Application.ViewModels
     {
         public IList<Route>? Routes { get; set; }
 
-        public IList<Ticket>? Tickets { get; set; }
+        //public IList<Ticket>? Tickets { get; set; }
 
         public IList<Vehicle>? Vehicles { get; set; }
     }

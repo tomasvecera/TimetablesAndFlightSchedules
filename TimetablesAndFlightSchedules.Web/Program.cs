@@ -17,7 +17,7 @@ builder.Services.AddDbContext<TimetablesAndFlightSchedulesDbContext>(optionsBuil
 builder.Services.AddScoped<IRouteAdminService, RouteAdminService>();
 builder.Services.AddScoped<IRouteInstanceAdminService, RouteInstanceAdminService>();
 builder.Services.AddScoped<IVehicleAdminService, VehicleAdminService>();
-builder.Services.AddScoped<ITicketAdminService, TicketAdminService>();
+//builder.Services.AddScoped<ITicketAdminService, TicketAdminService>();
 builder.Services.AddScoped<ICityAdminService, CityAdminService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 

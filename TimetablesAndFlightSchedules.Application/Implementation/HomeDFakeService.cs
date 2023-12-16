@@ -16,7 +16,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             RouteVehicleTicketViewModel viewModel = new RouteVehicleTicketViewModel();
 
             viewModel.Vehicles = DatabaseFake.Vehicles;
-            viewModel.Tickets = DatabaseFake.Tickets;
+            //viewModel.Tickets = DatabaseFake.Tickets;
             viewModel.Routes = DatabaseFake.Routes;
 
             return viewModel;
