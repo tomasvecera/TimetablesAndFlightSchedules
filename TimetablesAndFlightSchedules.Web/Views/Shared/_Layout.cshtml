@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TimetablesAndFlightSchedules.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TimetablesAndFlightSchedules.Web.styles.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
@@ -26,20 +27,43 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Administration
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Route" asp-action="Index">Route Administration</a></li>
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="RouteInstance" asp-action="Index">Route Instance Administration</a></li>
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Vehicle Administration</a></li>
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ticket" asp-action="Index">Ticket Administration</a></li>
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="City" asp-action="Index">City Administration</a></li>
-                            </ul>
-                        </li>
+                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.Manager))))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Administration
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="Route" asp-action="Index">Route Administration</a></li>
+                                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="RouteInstance" asp-action="Index">Route Instance Administration</a></li>
+                                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Vehicle Administration</a></li>
+                                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ticket" asp-action="Index">Ticket Administration</a></li>
+                                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="City" asp-action="Index">City Administration</a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                 </div>
+                @{
+                    @if (User.Identity.IsAuthenticated == false)
+                    {
+                        <ul class="navbar-nav navbar-right">
+                            <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Register"><i class="bi bi-person-plus"></i> Sign Up</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Login"><i class="bi bi-unlock"></i> Login</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item text-dark" asp-area="Security" asp-controller="Account" asp-action="Logout"><i class="bi bi-person-slash me-1"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                }
             </div>
         </nav>
     </header>

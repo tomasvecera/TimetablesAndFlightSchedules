@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Routing;
 using TimetablesAndFlightSchedules.Application.Abstraction;
 using TimetablesAndFlightSchedules.Domain.Entities;
 using TimetablesAndFlightSchedules.Infrastructure.Database;
+using TimetablesAndFlightSchedules.Infrastructure.Identity.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Manager))]
     public class CityController : Controller
     {
         ICityAdminService _cityService;

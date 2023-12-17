@@ -1,14 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TimetablesAndFlightSchedules.Domain.Entities;
+using TimetablesAndFlightSchedules.Infrastructure.Identity;
 
 namespace TimetablesAndFlightSchedules.Infrastructure.Database
 {
-    public class TimetablesAndFlightSchedulesDbContext : DbContext
+    public class TimetablesAndFlightSchedulesDbContext : IdentityDbContext<User, Role, int>
     {
         public DbSet<City> Cities { get; set; }
         public DbSet<Route> Routes { get; set; }
@@ -33,6 +37,22 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             modelBuilder.Entity<RouteInstance>().HasData(dbInit.GetRouteInstances());
             //modelBuilder.Entity<Ticket>().HasData(dbInit.GetTickets());
             modelBuilder.Entity<Vehicle>().HasData(dbInit.GetVehicles());
+
+
+            //Identity - User and Role initialization
+            //roles must be added first
+            modelBuilder.Entity<Role>().HasData(dbInit.CreateRoles());
+
+            //then, create users ..
+            (User admin, List<IdentityUserRole<int>> adminUserRoles) = dbInit.CreateAdminWithRoles();
+            (User manager, List<IdentityUserRole<int>> managerUserRoles) = dbInit.CreateManagerWithRoles();
+
+            //.. and add them to the table
+            modelBuilder.Entity<User>().HasData(admin, manager);
+
+            //and finally, connect the users with the roles
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(adminUserRoles);
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(managerUserRoles);
         }
     }
 }
