@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimetablesAndFlightSchedules.Domain.Entities;
 using TimetablesAndFlightSchedules.Infrastructure.Identity;
+using TimetablesAndFlightSchedules.Infrastructure.Database.Configuration;
 
 namespace TimetablesAndFlightSchedules.Infrastructure.Database
 {
@@ -17,9 +18,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
         public DbSet<City> Cities { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<RouteInstance> RouteInstances { get; set; }
-        //public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
@@ -35,7 +34,6 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             modelBuilder.Entity<City>().HasData(dbInit.GetCities());
             modelBuilder.Entity<Route>().HasData(dbInit.GetRoutes());
             modelBuilder.Entity<RouteInstance>().HasData(dbInit.GetRouteInstances());
-            //modelBuilder.Entity<Ticket>().HasData(dbInit.GetTickets());
             modelBuilder.Entity<Vehicle>().HasData(dbInit.GetVehicles());
 
 
@@ -53,6 +51,12 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             //and finally, connect the users with the roles
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(adminUserRoles);
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(managerUserRoles);
+
+            //configuration of User entity using IUser interface property inside Order entity
+            modelBuilder.Entity<Order>().HasOne<User>(e => e.User as User);
+
+            //configure DateTimeCreated for Order entity from configuration class
+            modelBuilder.ApplyConfiguration<Order>(new OrderConfiguration_MySQL());
         }
     }
 }
