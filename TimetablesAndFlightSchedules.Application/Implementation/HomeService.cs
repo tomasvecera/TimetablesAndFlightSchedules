@@ -17,12 +17,12 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
-        public RouteVehicleTicketViewModel GetHomeViewModel()
+        public RouteVehicleCityViewModel GetHomeViewModel()
         {
-            RouteVehicleTicketViewModel viewModel = new RouteVehicleTicketViewModel();
+            RouteVehicleCityViewModel viewModel = new RouteVehicleCityViewModel();
 
             viewModel.Vehicles = _timetablesAndFlightSchedulesDbContext.Vehicles.ToList();
-            //viewModel.Tickets = _timetablesAndFlightSchedulesDbContext.Tickets.ToList();
+            viewModel.Cities = _timetablesAndFlightSchedulesDbContext.Cities.ToList();
             viewModel.Routes = _timetablesAndFlightSchedulesDbContext.Routes.ToList();
 
             return viewModel;

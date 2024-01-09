@@ -19,7 +19,7 @@ namespace TimetablesAndFlightSchedules.Web.Controllers
 
         public IActionResult Index()
         {
-            RouteVehicleTicketViewModel viewModel = _homeService.GetHomeViewModel();
+            RouteVehicleCityViewModel viewModel = _homeService.GetHomeViewModel();
             return View(viewModel);
         }
 

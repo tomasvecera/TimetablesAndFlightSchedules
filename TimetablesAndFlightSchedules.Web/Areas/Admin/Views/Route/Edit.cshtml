@@ -3,57 +3,59 @@
 @{
     ViewData["Title"] = "Route - Edit";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="bg-light rounded p-5">
+    <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Edit" method="post">
-    @*<div class="mb-3">
-        <label class="form-label">From</label>
-        <input class="form-control" asp-for="CityFrom">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">To</label>
-        <input class="form-control" asp-for="CityTo">
-    </div>*@
+    <form asp-action="Edit" method="post">
+        @*<div class="mb-3">
+            <label class="form-label">From</label>
+            <input class="form-control" asp-for="CityFrom">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">To</label>
+            <input class="form-control" asp-for="CityTo">
+        </div>*@
 
 
-    <div class="mb-3">
-        <label class="form-label">From</label>
-        <select asp-for="CityFromID" class="form-control" asp-items="ViewBag.CityFromID"></select>
-        <span asp-validation-for="CityFromID" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">To</label>
-        <select asp-for="CityToID" class="form-control" asp-items="ViewBag.CityToID"></select>
-        <span asp-validation-for="CityToID" class="text-danger"></span>
-    </div>
-    @*<div class="mb-3">
-        <label class="form-label">Date</label>
-        <input class="form-control" asp-for="Date">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Departure Time</label>
-        <input class="form-control" asp-for="DepartureTime">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Arrival Time</label>
-        <input class="form-control" asp-for="ArrivalTime">
-    </div>*@
-    <div class="mb-3">
-        <label class="form-label">@nameof(Vehicle.VehicleType)</label>
-        <select asp-for="VehicleID" class="form-control" asp-items="ViewBag.VehicleID"></select>
-        <span asp-validation-for="VehicleID" class="text-danger"></span>
-    </div>
-    @*<div class="mb-3">
-        <label class="form-label">@nameof(Ticket.Price)</label>
-        <select asp-for="TicketID" class="form-control" asp-items="ViewBag.TicketID"></select>
-    </div>*@
-    <div class="mb-3">
-        <label class="form-label">Price of Ticket</label>
-        <input asp-for="PriceOfTicket" class="form-control">
-        <span asp-validation-for="PriceOfTicket" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <div class="mb-3">
+            <label class="form-label">From</label>
+            <select asp-for="CityFromID" class="form-control" asp-items="ViewBag.CityFromID"></select>
+            <span asp-validation-for="CityFromID" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">To</label>
+            <select asp-for="CityToID" class="form-control" asp-items="ViewBag.CityToID"></select>
+            <span asp-validation-for="CityToID" class="text-danger"></span>
+        </div>
+        @*<div class="mb-3">
+            <label class="form-label">Date</label>
+            <input class="form-control" asp-for="Date">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Departure Time</label>
+            <input class="form-control" asp-for="DepartureTime">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Arrival Time</label>
+            <input class="form-control" asp-for="ArrivalTime">
+        </div>*@
+        <div class="mb-3">
+            <label class="form-label">@nameof(Vehicle.VehicleType)</label>
+            <select asp-for="VehicleID" class="form-control" asp-items="ViewBag.VehicleID"></select>
+            <span asp-validation-for="VehicleID" class="text-danger"></span>
+        </div>
+        @*<div class="mb-3">
+            <label class="form-label">@nameof(Ticket.Price)</label>
+            <select asp-for="TicketID" class="form-control" asp-items="ViewBag.TicketID"></select>
+        </div>*@
+        <div class="mb-3">
+            <label class="form-label">Price of Ticket</label>
+            <input asp-for="PriceOfTicket" class="form-control">
+            <span asp-validation-for="PriceOfTicket" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 
 @section Scripts
     {

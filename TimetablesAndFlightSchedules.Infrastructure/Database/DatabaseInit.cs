@@ -300,40 +300,5 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
 
             return (manager, managerUserRoles);
         }
-
-        public (User, List<IdentityUserRole<int>>) CreateCtustomerWithRoles()
-        {
-            User customer = new User()
-            {
-                Id = 2,
-                FirstName = "Customerek",
-                LastName = "Customerovky",
-                UserName = "customer",
-                NormalizedUserName = "CUSTOMER",
-                Email = "customer@customer.cz",
-                NormalizedEmail = "CUSTOMER@CUSTOMER.CZ",
-                EmailConfirmed = true,
-                PasswordHash = "AQAAAAEAACcQAAAAEOzeajp5etRMZn7TWj9lhDMJ2GSNTtljLWVIWivadWXNMz8hj6mZ9iDR+alfEUHEMQ==",
-                SecurityStamp = "MAJXOSATJKOEM4YFF32Y5G2XPR5OFEL6",
-                ConcurrencyStamp = "7a8d96fd-5918-441b-b800-cbafa99de97b",
-                PhoneNumber = null,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                LockoutEnd = null,
-                LockoutEnabled = true,
-                AccessFailedCount = 0
-            };
-
-            List<IdentityUserRole<int>> customerUserRoles = new List<IdentityUserRole<int>>()
-            {
-                new IdentityUserRole<int>()
-                {
-                    UserId = 3,
-                    RoleId = 3
-                }
-            };
-
-            return (customer, customerUserRoles);
-        }
     }
 }

@@ -3,38 +3,40 @@
 @{
     ViewData["Title"] = "Vehicle Administration";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="bg-light rounded p-5">
+    <h1>@ViewData["Title"]</h1>
 
-<a type="button" class="btn btn-outline-primary btn-sm" asp-action="Create">Create Vehicle</a>
+    <a type="button" class="btn btn-outline-primary btn-sm" asp-action="Create">Create Vehicle</a>
 
-@{
-    if (Model != null && Model.Count > 0)
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">@nameof(Vehicle.Id)</th>
-                    <th scope="col">@nameof(Vehicle.VehicleType)</th>
-                    <th scope="col">@nameof(Vehicle.NumberOfTickets)</th>
-                    <th scope="col">Delete</th>
-                    <th scope="col">Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Count; ++i)
-                {
+    @{
+        if (Model != null && Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
                     <tr>
-                        <th scope="row">@Model[i].Id</th>
-                        <td>@Model[i].VehicleType</td>
-                        <td>@Model[i].NumberOfTickets</td>
-                        <td><a asp-action="Delete" asp-route-Id="@Model[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
-                        <td><a asp-action="Edit" asp-route-Id="@Model[i].Id">Edit</a></td>
+                        <th scope="col">@nameof(Vehicle.Id)</th>
+                        <th scope="col">@nameof(Vehicle.VehicleType)</th>
+                        <th scope="col">@nameof(Vehicle.NumberOfTickets)</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; ++i)
+                    {
+                        <tr>
+                            <th scope="row">@Model[i].Id</th>
+                            <td>@Model[i].VehicleType</td>
+                            <td>@Model[i].NumberOfTickets</td>
+                            <td><a asp-action="Delete" asp-route-Id="@Model[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
+                            <td><a asp-action="Edit" asp-route-Id="@Model[i].Id">Edit</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     }
-}
+</div>
 
 @section Scripts
 {

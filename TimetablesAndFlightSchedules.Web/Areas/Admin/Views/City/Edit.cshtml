@@ -3,16 +3,18 @@
 @{
     ViewData["Title"] = "City - Edit";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="bg-light rounded p-5">
+    <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Edit" method="post">
-    <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input class="form-control" asp-for="Name">
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <form asp-action="Edit" method="post">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 
 @section Scripts
     {

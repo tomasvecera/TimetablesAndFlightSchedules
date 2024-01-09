@@ -11,7 +11,7 @@ using TimetablesAndFlightSchedules.Infrastructure.Database;
 namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
 {
     [DbContext(typeof(TimetablesAndFlightSchedulesDbContext))]
-    [Migration("20231216164534_mySQL_1.1.1_Login")]
+    [Migration("20240109140339_mySQL_1.1.1_Login")]
     partial class mySQL_111_Login
     {
         /// <inheritdoc />

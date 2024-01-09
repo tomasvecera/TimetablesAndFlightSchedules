@@ -11,12 +11,12 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 {
     public class HomeDFakeService : IHomeService
     {
-        public RouteVehicleTicketViewModel GetHomeViewModel()
+        public RouteVehicleCityViewModel GetHomeViewModel()
         {
-            RouteVehicleTicketViewModel viewModel = new RouteVehicleTicketViewModel();
+            RouteVehicleCityViewModel viewModel = new RouteVehicleCityViewModel();
 
             viewModel.Vehicles = DatabaseFake.Vehicles;
-            //viewModel.Tickets = DatabaseFake.Tickets;
+            viewModel.Cities = DatabaseFake.Cities;
             viewModel.Routes = DatabaseFake.Routes;
 
             return viewModel;
