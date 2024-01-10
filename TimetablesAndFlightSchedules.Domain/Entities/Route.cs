@@ -39,5 +39,7 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
 
         [Required]
         public double PriceOfTicket { get; set; }
+
+        public String? RouteName {  get; set; }
     }
 }

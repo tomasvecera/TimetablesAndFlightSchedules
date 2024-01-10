@@ -93,13 +93,14 @@
                 </div>
             </div>
             <div class="col-2 mx-5">
-                <button type="submit" class="btn btn-primary btn-block">Hledat</button>
+                <button type="submit" class="btn btn-primary btn-block" @*onclick="Buy(@Model.RouteInstances[1].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')"*@>Hledat</button>
             </div>
         </div>
     </form>
 </div>
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 @*
 <div class="d-flex justify-content-around">
@@ -157,5 +158,3 @@
     </form>
 </div>
 *@
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">

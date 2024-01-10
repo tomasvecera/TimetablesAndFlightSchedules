@@ -18,6 +18,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             viewModel.Vehicles = DatabaseFake.Vehicles;
             viewModel.Cities = DatabaseFake.Cities;
             viewModel.Routes = DatabaseFake.Routes;
+            viewModel.RouteInstances = DatabaseFake.RouteInstances;
 
             return viewModel;
         }

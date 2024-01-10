@@ -121,6 +121,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 2,
                 PriceOfTicket = 120,
                 VehicleID = 1,
+                RouteName = "Zlin, Brno; Autobus",
             });
             routes.Add(new Route()
             {
@@ -129,6 +130,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 2,
                 PriceOfTicket = 140,
                 VehicleID = 2,
+                RouteName = "Zlin, Brno; Vlak",
             });
             routes.Add(new Route()
             {
@@ -137,6 +139,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 1,
                 PriceOfTicket = 45,
                 VehicleID = 1,
+                RouteName = "Uherske Hradiste, Zlin; Autobus",
             });
             routes.Add(new Route()
             {
@@ -145,6 +148,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 5,
                 PriceOfTicket = 2000,
                 VehicleID = 3,
+                RouteName = "Praha, Rim; Letadlo A320",
             });
             return routes;
         }
@@ -160,6 +164,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(15, 30),
                 ArrivalTime = new TimeOnly(18, 00),
                 TravelTime = new TimeSpan(2, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 15:30; 18:00",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -169,6 +174,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(15, 30),
                 ArrivalTime = new TimeOnly(18, 00),
                 TravelTime = new TimeSpan(2, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 27.01.2024; 15:30; 18:00",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -178,6 +184,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(15, 30),
                 ArrivalTime = new TimeOnly(18, 00),
                 TravelTime = new TimeSpan(2, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 28.01.2024; 15:30; 18:00",
             });
             return routeInstances;
         }

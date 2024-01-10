@@ -24,6 +24,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             viewModel.Vehicles = _timetablesAndFlightSchedulesDbContext.Vehicles.ToList();
             viewModel.Cities = _timetablesAndFlightSchedulesDbContext.Cities.ToList();
             viewModel.Routes = _timetablesAndFlightSchedulesDbContext.Routes.ToList();
+            viewModel.RouteInstances = _timetablesAndFlightSchedulesDbContext.RouteInstances.ToList();
 
             return viewModel;
         }

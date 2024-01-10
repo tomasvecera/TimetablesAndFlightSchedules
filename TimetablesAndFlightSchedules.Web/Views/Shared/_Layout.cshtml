@@ -37,13 +37,38 @@
                                     <li><a class="dropdown-item" asp-area="Admin" asp-controller="Route" asp-action="Index">Route Administration</a></li>
                                     <li><a class="dropdown-item" asp-area="Admin" asp-controller="RouteInstance" asp-action="Index">Route Instance Administration</a></li>
                                     <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Vehicle Administration</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ticket" asp-action="Index">Ticket Administration</a></li>
                                     <li><a class="dropdown-item" asp-area="Admin" asp-controller="City" asp-action="Index">City Administration</a></li>
+                                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="OrderItem" asp-action="Index">Order Item Administration</a></li>
+                                </ul>
+                            </li>
+                        }
+                         @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" id="navbarDropdownCustomer" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Orders</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCustomer">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-area="Customer" asp-controller="CustomerOrders" asp-action="Index">My Orders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-area="Customer" asp-controller="CustomerOrderCart" asp-action="ApproveOrderInSession">Approve Current Order</a>
+                                    </li>
                                 </ul>
                             </li>
                         }
                     </ul>
-                </div>
+                    <ul class="navbar-nav navbar-right">
+                        @{
+                            double totalPrice = 0;
+                            string totalPriceString = "TotalPrice";
+                            if (Context.Session != null && Context.Session.IsAvailable && Context.Session.Keys.Contains(totalPriceString))
+                            {
+                                totalPrice = Context.Session.GetDouble(totalPriceString).GetValueOrDefault();
+                            }
+                            <li class="navbar-text"><a id="total_price" class="label" style="color:red;">@totalPrice.ToString("C2")</a></li>
+                        }
+                    </ul>
+                @*</div>*@
                 @{
                     @if (User.Identity.IsAuthenticated == false)
                     {
@@ -64,6 +89,7 @@
                         </ul>
                     }
                 }
+                </div>
             </div>
         </nav>
     </header>

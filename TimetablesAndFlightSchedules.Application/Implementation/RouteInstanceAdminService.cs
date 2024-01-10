@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,19 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 
         public IList<RouteInstance> Select()
         {
-            return _timetablesAndFlightSchedulesDbContext.RouteInstances.ToList();
+            return _timetablesAndFlightSchedulesDbContext.RouteInstances
+                                                          .Include(r => r.Route)
+                                                          .OrderBy(r => r.Id)
+                                                          .ToList();
         }
 
         public void Create(RouteInstance routeInstance)
         {
             if (_timetablesAndFlightSchedulesDbContext.RouteInstances != null)
             {
+                Route? route = _timetablesAndFlightSchedulesDbContext.Routes.FirstOrDefault(r => r.Id == routeInstance.RouteID);
+                routeInstance.RouteInstanceName = route.RouteName + "; " + routeInstance.Date + "; " + routeInstance.DepartureTime + "; " + routeInstance.ArrivalTime;
+
                 routeInstance.TravelTime = routeInstance.ArrivalTime - routeInstance.DepartureTime;
 
                 _timetablesAndFlightSchedulesDbContext.RouteInstances.Add(routeInstance);
@@ -63,6 +70,9 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                 routeInstance.DepartureTime = routeInstanceUpdated.DepartureTime;
                 routeInstance.ArrivalTime = routeInstanceUpdated.ArrivalTime;
                 routeInstance.TravelTime = routeInstanceUpdated.ArrivalTime - routeInstanceUpdated.DepartureTime;
+
+                Route? route = _timetablesAndFlightSchedulesDbContext.Routes.FirstOrDefault(r => r.Id == routeInstanceUpdated.RouteID);
+                routeInstance.RouteInstanceName = route.RouteName + "; " + routeInstanceUpdated.Date + "; " + routeInstanceUpdated.DepartureTime + "; " + routeInstanceUpdated.ArrivalTime;
 
                 _timetablesAndFlightSchedulesDbContext.SaveChanges();
             }

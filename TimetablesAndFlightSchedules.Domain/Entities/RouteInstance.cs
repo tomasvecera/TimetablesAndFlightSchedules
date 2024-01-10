@@ -13,16 +13,13 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
         [ForeignKey(nameof(Route))]
         public int RouteID { get; set; }
         public Route? Route { get; set; }
-
         [Required]
         public DateOnly Date { get; set; }
-
         [Required]
         public TimeOnly DepartureTime { get; set; }
-
         [Required]
         public TimeOnly ArrivalTime { get; set; }
-
         public TimeSpan TravelTime { get; set; }
+        public String? RouteInstanceName { get; set; }
     }
 }

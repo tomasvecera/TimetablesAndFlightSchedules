@@ -98,8 +98,8 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
 
         void SetRouteSelectLists()
         {
-            IList<Domain.Entities.Route> routes = _routeService.Select();
-            ViewData[nameof(RouteInstance.RouteID)] = new SelectList(routes, nameof(Domain.Entities.Route.Id), nameof(Domain.Entities.Route.Id));
+            IList<Domain.Entities.Route> routes = _routeService.Select();                                  // "z " + nameof(Domain.Entities.Route.CityFrom) + " do " + nameof(Domain.Entities.Route.CityTo)
+            ViewData[nameof(RouteInstance.RouteID)] = new SelectList(routes, nameof(Domain.Entities.Route.Id), nameof(Domain.Entities.Route.RouteName));
 
         }
     }

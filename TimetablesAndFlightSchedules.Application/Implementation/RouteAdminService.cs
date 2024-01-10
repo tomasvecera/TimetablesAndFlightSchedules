@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,24 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 
         public IList<Route> Select()
         {
-            return _timetablesAndFlightSchedulesDbContext.Routes.ToList();
+            return _timetablesAndFlightSchedulesDbContext.Routes
+                                                            .Include(r => r.Vehicle)
+                                                            .Include(r => r.CityFrom)
+                                                            .Include(r => r.CityTo)
+                                                            .OrderBy(r => r.Id)
+                                                            .ToList();
         }
 
         public void Create(Route route)
         {
             if (_timetablesAndFlightSchedulesDbContext.Routes != null)
             {
+                City? cityF = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == route.CityFromID);
+                City? cityT = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == route.CityToID);
+                Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == route.VehicleID);
+                route.RouteName = cityF.Name + ", " + cityT.Name + "; " + vehicle.VehicleType;
+                //route.RouteName = route.CityFrom.Name + ", " + route.CityTo.Name;
+
                 _timetablesAndFlightSchedulesDbContext.Routes.Add(route);
                 _timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
@@ -58,14 +70,16 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             {
                 route.CityFromID = routeUpdated.CityFromID;
                 route.CityToID = routeUpdated.CityToID;
-                //route.TicketID = routeUpdated.TicketID;
                 route.VehicleID = routeUpdated.VehicleID;
                 route.PriceOfTicket = routeUpdated.PriceOfTicket;
 
+                //route.RouteName = route.CityFrom.Name + "," + route.CityTo.Name;
+                City? cityF = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == routeUpdated.CityFromID);
+                City? cityT = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == routeUpdated.CityToID);
+                Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == route.VehicleID);
+                route.RouteName = cityF.Name + ", " + cityT.Name + "; " + vehicle.VehicleType;
+
                 _timetablesAndFlightSchedulesDbContext.SaveChanges();
-                //route.CityFrom = routeUpdated.CityFrom;
-                //route.Ticket = routeUpdated.Ticket;
-                //route.Vehicle = routeUpdated.Vehicle;
             }
         }
     }
