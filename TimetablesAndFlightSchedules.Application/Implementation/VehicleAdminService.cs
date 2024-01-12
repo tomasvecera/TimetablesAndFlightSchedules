@@ -27,8 +27,22 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
         {
             if (_timetablesAndFlightSchedulesDbContext.Vehicles != null)
             {
-                _timetablesAndFlightSchedulesDbContext.Vehicles.Add(vehicle);
-                _timetablesAndFlightSchedulesDbContext.SaveChanges();
+                bool contains = false;
+                foreach (Vehicle v in _timetablesAndFlightSchedulesDbContext.Vehicles)
+                {
+                    if (v.VehicleType == vehicle.VehicleType)
+                    {
+                        contains = true;
+                    }
+                }
+                if (!contains)
+                {
+                    _timetablesAndFlightSchedulesDbContext.Vehicles.Add(vehicle);
+                    _timetablesAndFlightSchedulesDbContext.SaveChanges();
+                }
+
+                //_timetablesAndFlightSchedulesDbContext.Vehicles.Add(vehicle);
+                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 
@@ -54,12 +68,29 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
         {
             Vehicle? vehicle = 
                 _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == vehicleUpdated.Id);
+
             if (vehicle != null)
             {
-                vehicle.VehicleType = vehicleUpdated.VehicleType;
-                vehicle.NumberOfTickets = vehicleUpdated.NumberOfTickets;
+                bool contains = false;
+                foreach (Vehicle v in _timetablesAndFlightSchedulesDbContext.Vehicles)
+                {
+                    if (v.VehicleType == vehicleUpdated.VehicleType)
+                    {
+                        contains = true;
+                    }
+                }
+                if (!contains)
+                {
+                    vehicle.VehicleType = vehicleUpdated.VehicleType;
+                    vehicle.NumberOfTickets = vehicleUpdated.NumberOfTickets;
 
-                _timetablesAndFlightSchedulesDbContext.SaveChanges();
+                    _timetablesAndFlightSchedulesDbContext.SaveChanges();
+                }
+
+                //vehicle.VehicleType = vehicleUpdated.VehicleType;
+                //vehicle.NumberOfTickets = vehicleUpdated.NumberOfTickets;
+
+                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 

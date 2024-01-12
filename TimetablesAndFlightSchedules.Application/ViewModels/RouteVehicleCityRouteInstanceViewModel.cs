@@ -7,13 +7,12 @@ using TimetablesAndFlightSchedules.Domain.Entities;
 
 namespace TimetablesAndFlightSchedules.Application.ViewModels
 {
-    public class RouteVehicleCityViewModel
+    public class RouteVehicleCityRouteInstanceViewModel
     {
         public IList<Route>? Routes { get; set; }
+        public IList<Vehicle>? Vehicles { get; set; }
 
         public IList<City>? Cities { get; set; }
-
-        public IList<Vehicle>? Vehicles { get; set; }
 
         public IList<RouteInstance>? RouteInstances { get; set; }
     }

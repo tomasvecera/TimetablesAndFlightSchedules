@@ -6,7 +6,8 @@
 <div class="bg-light rounded p-5">
     <h1>@ViewData["Title"]</h1>
 
-    <a asp-action="Create">Create Order Item</a>
+    <a type="button" class="btn btn-outline-primary btn-sm" asp-action="Create">Create Order Item</a>
+
     @{
         if (Model != null && Model.Count > 0)
         {
@@ -21,6 +22,8 @@
                         <th scope="col">@nameof(OrderItem.Order.User.UserName)</th>
                         <th scope="col">@nameof(OrderItem.Amount)</th>
                         <th scope="col">@nameof(OrderItem.Price)</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +38,8 @@
                             <td>@Model[i].Order.User.UserName</td>
                             <td>@Model[i].Amount</td>
                             <td>@Model[i].Price</td>
+                            <td><a asp-action="Delete" asp-route-Id="@Model[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
+                            <td><a asp-action="Edit" asp-route-Id="@Model[i].Id">Edit</a></td>
                         </tr>
                     }
                 </tbody>

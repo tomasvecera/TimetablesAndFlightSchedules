@@ -9,6 +9,6 @@ namespace TimetablesAndFlightSchedules.Application.Abstraction
 {
     public interface IHomeService
     {
-        RouteVehicleCityViewModel GetHomeViewModel();
+        RouteVehicleCityRouteInstanceViewModel GetHomeViewModel();
     }
 }

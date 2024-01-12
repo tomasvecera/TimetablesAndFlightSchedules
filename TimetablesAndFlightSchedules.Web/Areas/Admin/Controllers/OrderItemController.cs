@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TimetablesAndFlightSchedules.Application.Abstraction;
 using TimetablesAndFlightSchedules.Domain.Entities;
+using TimetablesAndFlightSchedules.Infrastructure.Database;
 using TimetablesAndFlightSchedules.Infrastructure.Identity.Enums;
 
 namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
@@ -14,11 +15,14 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         IOrderItemService _orderItemService;
         IRouteInstanceAdminService _routeInstanceService;
         IOrderService _orderService;
-        public OrderItemController(IOrderItemService orderItemService, IRouteInstanceAdminService routeInstanceService, IOrderService orderService)
+        TimetablesAndFlightSchedulesDbContext _timetablesAndFlightSchedulesDbContext;
+
+        public OrderItemController(IOrderItemService orderItemService, IRouteInstanceAdminService routeInstanceService, IOrderService orderService, TimetablesAndFlightSchedulesDbContext timetablesAndFlightSchedulesDbContext)
         {
             _orderItemService = orderItemService;
             _routeInstanceService = routeInstanceService;
             _orderService = orderService;
+            _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
         public IActionResult Index()
@@ -47,6 +51,43 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
                 SetOrderAndRouteInstanceSelectLists();
                 return View(orderItem);
             }
+        }
+
+        public IActionResult Delete(int Id)
+        {
+            bool deleted = _orderItemService.Delete(Id);
+
+            if (deleted)
+            {
+                return RedirectToAction(nameof(OrderItemController.Index));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            OrderItem? orderItem = _timetablesAndFlightSchedulesDbContext.OrderItems.FirstOrDefault(oi => oi.Id == Id);
+
+            return View(orderItem);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(OrderItem orderItem)
+        {
+            if (ModelState.IsValid)
+            {
+                _orderItemService.Edit(orderItem);
+                return RedirectToAction(nameof(OrderItemController.Index));
+            }
+            else
+            {
+                return View(orderItem);
+            }
+            //return RedirectToAction(nameof(RouteController.Index));
         }
 
         void SetOrderAndRouteInstanceSelectLists()

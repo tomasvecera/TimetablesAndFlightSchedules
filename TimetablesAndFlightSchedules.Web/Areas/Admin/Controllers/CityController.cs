@@ -13,10 +13,12 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
     public class CityController : Controller
     {
         ICityAdminService _cityService;
+        TimetablesAndFlightSchedulesDbContext _timetablesAndFlightSchedulesDbContext;
 
-        public CityController(ICityAdminService cityService)
+        public CityController(ICityAdminService cityService, TimetablesAndFlightSchedulesDbContext timetablesAndFlightSchedulesDbContext)
         {
             _cityService = cityService;
+            _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
         public IActionResult Index()
@@ -37,7 +39,7 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _cityService.Create(city);
-                return RedirectToAction(nameof(RouteController.Index));
+                return RedirectToAction(nameof(CityController.Index));
             }
             else
             {
@@ -56,7 +58,7 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
 
             if (deleted)
             {
-                return RedirectToAction(nameof(RouteController.Index));
+                return RedirectToAction(nameof(CityController.Index));
             }
             else
             {
@@ -67,8 +69,9 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            City? city =
-                DatabaseFake.Cities.FirstOrDefault(city => city.Id == Id);
+            //City? city =
+            //    DatabaseFake.Cities.FirstOrDefault(city => city.Id == Id);
+            City? city = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(city => city.Id == Id);
 
             return View(city);
         }
@@ -79,15 +82,12 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _cityService.Edit(city);
-                return RedirectToAction(nameof(RouteController.Index));
+                return RedirectToAction(nameof(CityController.Index));
             }
             else
             {
                 return View(city);
             }
-
-            //_cityService.Edit(city);
-            //return RedirectToAction(nameof(RouteController.Index));
         }
     }
 }

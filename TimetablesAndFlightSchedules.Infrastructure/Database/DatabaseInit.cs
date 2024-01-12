@@ -10,6 +10,7 @@ using TimetablesAndFlightSchedules.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using TimetablesAndFlightSchedules.Infrastructure.Identity;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TimetablesAndFlightSchedules.Infrastructure.Database
 {
@@ -74,7 +75,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             vehicles.Add(new Vehicle()
             {
                 Id = 3,
-                VehicleType = "Letadlo A320",
+                VehicleType = "Letadlo",
                 NumberOfTickets = 200,
             });
             return vehicles;
@@ -126,11 +127,11 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
             routes.Add(new Route()
             {
                 Id = 2,
-                CityFromID = 1,
-                CityToID = 2,
-                PriceOfTicket = 140,
+                CityFromID = 2,
+                CityToID = 4,
+                PriceOfTicket = 350,
                 VehicleID = 2,
-                RouteName = "Zlin, Brno; Vlak",
+                RouteName = "Brno, Praha; Vlak",
             });
             routes.Add(new Route()
             {
@@ -146,9 +147,9 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 Id = 4,
                 CityFromID = 4,
                 CityToID = 5,
-                PriceOfTicket = 2000,
+                PriceOfTicket = 1500,
                 VehicleID = 3,
-                RouteName = "Praha, Rim; Letadlo A320",
+                RouteName = "Praha, Rim; Letadlo",
             });
             return routes;
         }
@@ -156,35 +157,148 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
         public IList<RouteInstance> GetRouteInstances()
         {
             IList<RouteInstance> routeInstances = new List<RouteInstance>();
+            // Bus
             routeInstances.Add(new RouteInstance()
             {
                 Id = 1,
                 RouteID = 1,
                 Date = new DateOnly(2024, 01, 26),
-                DepartureTime = new TimeOnly(15, 30),
-                ArrivalTime = new TimeOnly(18, 00),
-                TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 15:30; 18:00",
+                DepartureTime = new TimeOnly(10, 00),
+                ArrivalTime = new TimeOnly(11, 30),
+                TravelTime = new TimeSpan(1, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 10:00; 11:30",
             });
             routeInstances.Add(new RouteInstance()
             {
                 Id = 2,
                 RouteID = 1,
-                Date = new DateOnly(2024, 01, 27),
-                DepartureTime = new TimeOnly(15, 30),
-                ArrivalTime = new TimeOnly(18, 00),
-                TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 27.01.2024; 15:30; 18:00",
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(13, 30),
+                ArrivalTime = new TimeOnly(15, 00),
+                TravelTime = new TimeSpan(1, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 13:30; 15:00",
             });
             routeInstances.Add(new RouteInstance()
             {
                 Id = 3,
                 RouteID = 1,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(15, 30),
+                ArrivalTime = new TimeOnly(17, 00),
+                TravelTime = new TimeSpan(1, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 15:30; 17:00",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 4,
+                RouteID = 1,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(16, 30),
+                ArrivalTime = new TimeOnly(18, 00),
+                TravelTime = new TimeSpan(1, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 16:30; 18:00",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 5,
+                RouteID = 1,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(17, 00),
+                ArrivalTime = new TimeOnly(18, 30),
+                TravelTime = new TimeSpan(1, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 17:00; 18:30",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 6,
+                RouteID = 1,
+                Date = new DateOnly(2024, 01, 27),
+                DepartureTime = new TimeOnly(15, 30),
+                ArrivalTime = new TimeOnly(17, 00),
+                TravelTime = new TimeSpan(1, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 27.01.2024; 15:30; 17:00",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 7,
+                RouteID = 1,
                 Date = new DateOnly(2024, 01, 28),
                 DepartureTime = new TimeOnly(15, 30),
-                ArrivalTime = new TimeOnly(18, 00),
+                ArrivalTime = new TimeOnly(17, 00),
+                TravelTime = new TimeSpan(1, 30, 0),
+                RouteInstanceName = "Zlin, Brno; Autobus; 28.01.2024; 15:30; 17:00",
+            });
+            // Train
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 8,
+                RouteID = 2,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(10, 00),
+                ArrivalTime = new TimeOnly(12, 30),
                 TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 28.01.2024; 15:30; 18:00",
+                RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 10:00; 12:30",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 9,
+                RouteID = 2,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(12, 00),
+                ArrivalTime = new TimeOnly(14, 30),
+                TravelTime = new TimeSpan(2, 30, 0),
+                RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 12:00; 14:30",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 10,
+                RouteID = 2,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(14, 00),
+                ArrivalTime = new TimeOnly(16, 30),
+                TravelTime = new TimeSpan(2, 30, 0),
+                RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 14:00; 16:30",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 11,
+                RouteID = 2,
+                Date = new DateOnly(2024, 01, 27),
+                DepartureTime = new TimeOnly(12, 00),
+                ArrivalTime = new TimeOnly(14, 30),
+                TravelTime = new TimeSpan(2, 30, 0),
+                RouteInstanceName = "Brno, Praha; Vlak; 27.01.2024; 12:00; 14:30",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 12,
+                RouteID = 2,
+                Date = new DateOnly(2024, 01, 28),
+                DepartureTime = new TimeOnly(12, 00),
+                ArrivalTime = new TimeOnly(14, 30),
+                TravelTime = new TimeSpan(2, 30, 0),
+                RouteInstanceName = "Brno, Praha; Vlak; 28.01.2024; 12:00; 14:30",
+            });
+            // Airplain
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 13,
+                RouteID = 4,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(12, 00),
+                ArrivalTime = new TimeOnly(14, 00),
+                TravelTime = new TimeSpan(2, 00, 0),
+                RouteInstanceName = "Praha, Rim; Letadlo; 26.01.2024; 12:00; 14:00",
+            });
+            routeInstances.Add(new RouteInstance()
+            {
+                Id = 14,
+                RouteID = 4,
+                Date = new DateOnly(2024, 01, 26),
+                DepartureTime = new TimeOnly(16, 00),
+                ArrivalTime = new TimeOnly(18, 00),
+                TravelTime = new TimeSpan(2, 00, 0),
+                RouteInstanceName = "Praha, Rim; Letadlo; 26.01.2024; 16:00; 18:00",
             });
             return routeInstances;
         }

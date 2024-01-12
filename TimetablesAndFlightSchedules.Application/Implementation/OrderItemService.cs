@@ -43,5 +43,39 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             }
         }
 
+        public bool Delete(int id)
+        {
+            bool deleted = false;
+
+            OrderItem? orderItem =
+                _timetablesAndFlightSchedulesDbContext.OrderItems.FirstOrDefault(oi => oi.Id == id);
+
+            if (orderItem != null)
+            {
+                _timetablesAndFlightSchedulesDbContext.OrderItems.Remove(orderItem);
+                _timetablesAndFlightSchedulesDbContext.SaveChanges();
+
+                deleted = true;
+            }
+
+            return deleted;
+        }
+
+        public void Edit(OrderItem orderItemUpdated)
+        {
+            OrderItem? orderItem =
+                _timetablesAndFlightSchedulesDbContext.OrderItems.FirstOrDefault(oi => oi.Id == orderItemUpdated.Id);
+            if (orderItem != null)
+            {
+                orderItem.Order = orderItemUpdated.Order;
+                orderItem.OrderID = orderItemUpdated.OrderID;
+                orderItem.Price = orderItemUpdated.Price;
+                orderItem.Amount = orderItemUpdated.Amount;
+                orderItem.RouteInstance = orderItemUpdated.RouteInstance;
+                orderItem.RouteInstanceID = orderItemUpdated.RouteInstanceID;
+
+                _timetablesAndFlightSchedulesDbContext.SaveChanges();
+            }
+        }
     }
 }

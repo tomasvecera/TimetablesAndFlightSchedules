@@ -22,7 +22,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
         public IList<Order> Select()
         {
             return _timetablesAndFlightSchedulesDbContext.Orders
-                                                          .Include(oi => oi.User)
+                                                          .Include(o => o.User)
                                                           .ToList();
         }
     }

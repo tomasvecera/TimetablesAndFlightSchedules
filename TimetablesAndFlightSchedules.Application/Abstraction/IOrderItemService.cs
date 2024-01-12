@@ -11,5 +11,7 @@ namespace TimetablesAndFlightSchedules.Application.Abstraction
     {
         IList<OrderItem> Select();
         void Create(OrderItem orderItem);
+        bool Delete(int id);
+        void Edit(OrderItem orderItem);
     }
 }

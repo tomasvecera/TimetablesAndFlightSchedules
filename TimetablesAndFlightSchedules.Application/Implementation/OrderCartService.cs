@@ -30,36 +30,37 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             double totalPrice = session.GetDouble(totalPriceString).GetValueOrDefault();
 
 
-            //geet product which should be added to cart/session
+            //get route instance which should be added to cart/session
             RouteInstance? routeInstance = _timetablesAndFlightSchedulesDbContext.RouteInstances.FirstOrDefault(rout => rout.Id == routeInstanceId);
+            Route? route = _timetablesAndFlightSchedulesDbContext.Routes.FirstOrDefault(r => r.Id == routeInstance.RouteID);
 
             if (routeInstance != null)
             {
                 //get list of order items from session
                 List<OrderItem> orderItems = session.GetObject<List<OrderItem>>(orderItemsString);
                 OrderItem? orderItemInSession = null;
-                //if the list is already in the session, find the order item with the ProductID, otherwise, create new list
+                //if the list is already in the session, find the order item with the RouteInstanceID, otherwise, create new list
                 if (orderItems != null)
                     orderItemInSession = orderItems.Find(oi => oi.RouteInstanceID == routeInstance.Id);
                 else
                     orderItems = new List<OrderItem>();
 
 
-                //if there is order item with ProductID, increase amount and price, otherwise, add new OrderItem
+                //if there is order item with RouteInstanceID, increase amount and price, otherwise, add new OrderItem
                 if (orderItemInSession != null)
                 {
                     ++orderItemInSession.Amount;
-                    orderItemInSession.Price += routeInstance.Route.PriceOfTicket;
+                    orderItemInSession.Price += route.PriceOfTicket;
                 }
                 else
                 {
-                    //create order item with connected product and add it to the list
+                    //create order item with connected route instance and add it to the list
                     OrderItem orderItem = new OrderItem()
                     {
                         RouteInstanceID = routeInstance.Id,
                         RouteInstance = routeInstance,
                         Amount = 1,
-                        Price = routeInstance.Route.PriceOfTicket
+                        Price = route.PriceOfTicket
                     };
 
                     orderItems.Add(orderItem);
@@ -69,7 +70,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                 session.SetObject(orderItemsString, orderItems);
 
                 //increase the total price and set it to the session
-                totalPrice += routeInstance.Route.PriceOfTicket;
+                totalPrice += route.PriceOfTicket;
                 session.SetDouble(totalPriceString, totalPrice);
             }
 

@@ -13,10 +13,12 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
     public class VehicleController : Controller
     {
         IVehicleAdminService _vehicleService;
+        TimetablesAndFlightSchedulesDbContext _timetablesAndFlightSchedulesDbContext;
 
-        public VehicleController(IVehicleAdminService vehicleService)
+        public VehicleController(IVehicleAdminService vehicleService, TimetablesAndFlightSchedulesDbContext timetablesAndFlightSchedulesDbContext)
         {
             _vehicleService = vehicleService;
+            _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
         public IActionResult Index()
@@ -37,16 +39,12 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _vehicleService.Create(vehicle);
-                return RedirectToAction(nameof(RouteController.Index));
+                return RedirectToAction(nameof(VehicleController.Index));
             }
             else
             {
                 return View(vehicle);
             }
-
-            //_vehicleService.Create(vehicle);
-
-            //return RedirectToAction(nameof(RouteController.Index));
         }
 
         public IActionResult Delete(int Id)
@@ -55,7 +53,7 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
 
             if (deleted)
             {
-                return RedirectToAction(nameof(RouteController.Index));
+                return RedirectToAction(nameof(VehicleController.Index));
             }
             else
             {
@@ -66,8 +64,10 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            Vehicle? vehicle =
-                DatabaseFake.Vehicles.FirstOrDefault(vehicle => vehicle.Id == Id);
+            //Vehicle? vehicle =
+            //    DatabaseFake.Vehicles.FirstOrDefault(vehicle => vehicle.Id == Id);
+
+            Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == Id);
 
             return View(vehicle);
         }
@@ -78,15 +78,12 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _vehicleService.Edit(vehicle);
-                return RedirectToAction(nameof(RouteController.Index));
+                return RedirectToAction(nameof(VehicleController.Index));
             }
             else
             {
                 return View(vehicle);
             }
-
-            //_vehicleService.Edit(vehicle);
-            //return RedirectToAction(nameof(RouteController.Index));
         }
     }
 }

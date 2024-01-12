@@ -15,11 +15,12 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
     {
         IRouteInstanceAdminService _routeInstanceService;
         IRouteAdminService _routeService;
-
-        public RouteInstanceController(IRouteInstanceAdminService routeInstanceService, IRouteAdminService routeService)
+        TimetablesAndFlightSchedulesDbContext _timetablesAndFlightSchedulesDbContext;
+        public RouteInstanceController(IRouteInstanceAdminService routeInstanceService, IRouteAdminService routeService, TimetablesAndFlightSchedulesDbContext timetablesAndFlightSchedulesDbContext)
         {
             _routeInstanceService = routeInstanceService;
             _routeService = routeService;
+            _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
         public IActionResult Index()
@@ -71,8 +72,10 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            RouteInstance? routeInstance =
-                DatabaseFake.RouteInstances.FirstOrDefault(routeInstance => routeInstance.Id == Id);
+            //RouteInstance? routeInstance =
+            //    DatabaseFake.RouteInstances.FirstOrDefault(routeInstance => routeInstance.Id == Id);
+
+            RouteInstance? routeInstance = _timetablesAndFlightSchedulesDbContext.RouteInstances.FirstOrDefault(ri => ri.Id == Id);
 
             SetRouteSelectLists();
             return View(routeInstance);
@@ -98,7 +101,7 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
 
         void SetRouteSelectLists()
         {
-            IList<Domain.Entities.Route> routes = _routeService.Select();                                  // "z " + nameof(Domain.Entities.Route.CityFrom) + " do " + nameof(Domain.Entities.Route.CityTo)
+            IList<Domain.Entities.Route> routes = _routeService.Select();
             ViewData[nameof(RouteInstance.RouteID)] = new SelectList(routes, nameof(Domain.Entities.Route.Id), nameof(Domain.Entities.Route.RouteName));
 
         }

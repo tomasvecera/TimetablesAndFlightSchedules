@@ -28,8 +28,19 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
         {
             if (_timetablesAndFlightSchedulesDbContext.Cities != null)
             {
-                _timetablesAndFlightSchedulesDbContext.Cities.Add(city);
-                _timetablesAndFlightSchedulesDbContext.SaveChanges();
+                bool contains = false;
+                foreach(City c in _timetablesAndFlightSchedulesDbContext.Cities)
+                {
+                    if(c.Name == city.Name)
+                    {
+                        contains = true;
+                    }
+                }
+                if (!contains)
+                {
+                    _timetablesAndFlightSchedulesDbContext.Cities.Add(city);
+                    _timetablesAndFlightSchedulesDbContext.SaveChanges();
+                }
             }
         }
 
@@ -57,9 +68,24 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                 _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == cityUpdated.Id);
             if (city != null)
             {
-                city.Name = cityUpdated.Name;
+                bool contains = false;
+                foreach (City c in _timetablesAndFlightSchedulesDbContext.Cities)
+                {
+                    if (c.Name == cityUpdated.Name)
+                    {
+                        contains = true;
+                    }
+                }
+                if (!contains)
+                {
+                    city.Name = cityUpdated.Name;
+                    _timetablesAndFlightSchedulesDbContext.SaveChanges();
+                }
 
-                _timetablesAndFlightSchedulesDbContext.SaveChanges();
+
+                //city.Name = cityUpdated.Name;
+
+                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 

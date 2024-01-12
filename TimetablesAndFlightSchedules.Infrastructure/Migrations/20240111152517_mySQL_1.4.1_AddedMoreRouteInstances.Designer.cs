@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetablesAndFlightSchedules.Infrastructure.Database;
 
@@ -10,9 +11,11 @@ using TimetablesAndFlightSchedules.Infrastructure.Database;
 namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
 {
     [DbContext(typeof(TimetablesAndFlightSchedulesDbContext))]
-    partial class TimetablesAndFlightSchedulesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240111152517_mySQL_1.4.1_AddedMoreRouteInstances")]
+    partial class mySQL_141_AddedMoreRouteInstances
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,10 +289,10 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CityFromID = 2,
-                            CityToID = 4,
-                            PriceOfTicket = 350.0,
-                            RouteName = "Brno, Praha; Vlak",
+                            CityFromID = 1,
+                            CityToID = 2,
+                            PriceOfTicket = 140.0,
+                            RouteName = "Zlin, Brno; Vlak",
                             VehicleID = 2
                         },
                         new
@@ -306,7 +309,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Id = 4,
                             CityFromID = 4,
                             CityToID = 5,
-                            PriceOfTicket = 1500.0,
+                            PriceOfTicket = 2000.0,
                             RouteName = "Praha, Rim; Letadlo",
                             VehicleID = 3
                         });
@@ -346,142 +349,52 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ArrivalTime = new TimeOnly(11, 30, 0),
+                            ArrivalTime = new TimeOnly(12, 30, 0),
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(10, 0, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 10:00; 11:30",
-                            TravelTime = new TimeSpan(0, 1, 30, 0, 0)
+                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 10:00; 12:30",
+                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
                         {
                             Id = 2,
-                            ArrivalTime = new TimeOnly(15, 0, 0),
+                            ArrivalTime = new TimeOnly(16, 0, 0),
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(13, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 13:30; 15:00",
-                            TravelTime = new TimeSpan(0, 1, 30, 0, 0)
+                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 13:30; 16:00",
+                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
                         {
                             Id = 3,
-                            ArrivalTime = new TimeOnly(17, 0, 0),
+                            ArrivalTime = new TimeOnly(18, 0, 0),
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(15, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 15:30; 17:00",
-                            TravelTime = new TimeSpan(0, 1, 30, 0, 0)
+                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 15:30; 18:00",
+                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
                         {
                             Id = 4,
                             ArrivalTime = new TimeOnly(18, 0, 0),
-                            Date = new DateOnly(2024, 1, 26),
-                            DepartureTime = new TimeOnly(16, 30, 0),
+                            Date = new DateOnly(2024, 1, 27),
+                            DepartureTime = new TimeOnly(15, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 16:30; 18:00",
-                            TravelTime = new TimeSpan(0, 1, 30, 0, 0)
+                            RouteInstanceName = "Zlin, Brno; Autobus; 27.01.2024; 15:30; 18:00",
+                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
                         {
                             Id = 5,
-                            ArrivalTime = new TimeOnly(18, 30, 0),
-                            Date = new DateOnly(2024, 1, 26),
-                            DepartureTime = new TimeOnly(17, 0, 0),
-                            RouteID = 1,
-                            RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 17:00; 18:30",
-                            TravelTime = new TimeSpan(0, 1, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ArrivalTime = new TimeOnly(17, 0, 0),
-                            Date = new DateOnly(2024, 1, 27),
-                            DepartureTime = new TimeOnly(15, 30, 0),
-                            RouteID = 1,
-                            RouteInstanceName = "Zlin, Brno; Autobus; 27.01.2024; 15:30; 17:00",
-                            TravelTime = new TimeSpan(0, 1, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ArrivalTime = new TimeOnly(17, 0, 0),
-                            Date = new DateOnly(2024, 1, 28),
-                            DepartureTime = new TimeOnly(15, 30, 0),
-                            RouteID = 1,
-                            RouteInstanceName = "Zlin, Brno; Autobus; 28.01.2024; 15:30; 17:00",
-                            TravelTime = new TimeSpan(0, 1, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ArrivalTime = new TimeOnly(12, 30, 0),
-                            Date = new DateOnly(2024, 1, 26),
-                            DepartureTime = new TimeOnly(10, 0, 0),
-                            RouteID = 2,
-                            RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 10:00; 12:30",
-                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ArrivalTime = new TimeOnly(14, 30, 0),
-                            Date = new DateOnly(2024, 1, 26),
-                            DepartureTime = new TimeOnly(12, 0, 0),
-                            RouteID = 2,
-                            RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 12:00; 14:30",
-                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ArrivalTime = new TimeOnly(16, 30, 0),
-                            Date = new DateOnly(2024, 1, 26),
-                            DepartureTime = new TimeOnly(14, 0, 0),
-                            RouteID = 2,
-                            RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 14:00; 16:30",
-                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ArrivalTime = new TimeOnly(14, 30, 0),
-                            Date = new DateOnly(2024, 1, 27),
-                            DepartureTime = new TimeOnly(12, 0, 0),
-                            RouteID = 2,
-                            RouteInstanceName = "Brno, Praha; Vlak; 27.01.2024; 12:00; 14:30",
-                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ArrivalTime = new TimeOnly(14, 30, 0),
-                            Date = new DateOnly(2024, 1, 28),
-                            DepartureTime = new TimeOnly(12, 0, 0),
-                            RouteID = 2,
-                            RouteInstanceName = "Brno, Praha; Vlak; 28.01.2024; 12:00; 14:30",
-                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ArrivalTime = new TimeOnly(14, 0, 0),
-                            Date = new DateOnly(2024, 1, 26),
-                            DepartureTime = new TimeOnly(12, 0, 0),
-                            RouteID = 4,
-                            RouteInstanceName = "Praha, Rim; Letadlo; 26.01.2024; 12:00; 14:00",
-                            TravelTime = new TimeSpan(0, 2, 0, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 14,
                             ArrivalTime = new TimeOnly(18, 0, 0),
-                            Date = new DateOnly(2024, 1, 26),
-                            DepartureTime = new TimeOnly(16, 0, 0),
-                            RouteID = 4,
-                            RouteInstanceName = "Praha, Rim; Letadlo; 26.01.2024; 16:00; 18:00",
-                            TravelTime = new TimeSpan(0, 2, 0, 0, 0)
+                            Date = new DateOnly(2024, 1, 28),
+                            DepartureTime = new TimeOnly(15, 30, 0),
+                            RouteID = 1,
+                            RouteInstanceName = "Zlin, Brno; Autobus; 28.01.2024; 15:30; 18:00",
+                            TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         });
                 });
 

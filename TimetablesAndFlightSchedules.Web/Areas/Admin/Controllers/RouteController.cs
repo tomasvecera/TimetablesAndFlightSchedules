@@ -15,16 +15,16 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         IRouteAdminService _routeService;
         IVehicleAdminService _vehicleService;
         ICityAdminService _cityService;
-        //ITicketAdminService _ticketService;
-        
-        public RouteController(IRouteAdminService routeService, IVehicleAdminService vehicleAdminService, ICityAdminService cityService/*, ITicketAdminService ticketService*/)
+        TimetablesAndFlightSchedulesDbContext _timetablesAndFlightSchedulesDbContext;
+
+        public RouteController(IRouteAdminService routeService, IVehicleAdminService vehicleAdminService, ICityAdminService cityService, TimetablesAndFlightSchedulesDbContext timetablesAndFlightSchedulesDbContext)
         {
             _routeService = routeService;
             _vehicleService = vehicleAdminService;
             _cityService = cityService;
-            //_ticketService = ticketService;
+            _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
-            
+
         public IActionResult Index()
         {
             IList<Domain.Entities.Route> routes = _routeService.Select();
@@ -50,10 +50,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
                 SetSelectLists();
                 return View(route);
             }
-
-            //_routeService.Create(route);
-
-            //return RedirectToAction(nameof(RouteController.Index));
         }
 
         public IActionResult Delete(int Id)
@@ -73,8 +69,9 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            Domain.Entities.Route? route =
-                DatabaseFake.Routes.FirstOrDefault(route => route.Id == Id);
+            //Domain.Entities.Route? route =
+            //    DatabaseFake.Routes.FirstOrDefault(route => route.Id == Id);
+            Domain.Entities.Route? route = _timetablesAndFlightSchedulesDbContext.Routes.FirstOrDefault(r => r.Id == Id);
 
             SetSelectLists();
             return View(route);

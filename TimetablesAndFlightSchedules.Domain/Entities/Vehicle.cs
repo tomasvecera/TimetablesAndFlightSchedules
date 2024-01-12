@@ -10,7 +10,7 @@ namespace TimetablesAndFlightSchedules.Domain.Entities
     public class Vehicle : Entity
     {
         [Required]
-        public string? VehicleType { get; set; } //bus, train, plane
+        public string? VehicleType { get; set; }
 
         [Required]
         public int NumberOfTickets { get; set; }

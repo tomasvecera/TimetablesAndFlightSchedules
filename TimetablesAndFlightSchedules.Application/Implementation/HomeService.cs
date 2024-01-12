@@ -17,9 +17,9 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
-        public RouteVehicleCityViewModel GetHomeViewModel()
+        public RouteVehicleCityRouteInstanceViewModel GetHomeViewModel()
         {
-            RouteVehicleCityViewModel viewModel = new RouteVehicleCityViewModel();
+            RouteVehicleCityRouteInstanceViewModel viewModel = new RouteVehicleCityRouteInstanceViewModel();
 
             viewModel.Vehicles = _timetablesAndFlightSchedulesDbContext.Vehicles.ToList();
             viewModel.Cities = _timetablesAndFlightSchedulesDbContext.Cities.ToList();

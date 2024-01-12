@@ -1,0 +1,184 @@
+﻿@model RouteVehicleCityRouteInstanceViewModel
+
+@{
+    ViewData["Title"] = "Results Page";
+}
+
+@{
+    var inputVehicle = Context.Session.GetString("InputVehicle");
+    var inputFrom = Context.Session.GetString("InputFrom");
+    var inputTo = Context.Session.GetString("InputTo");
+    var inputDate = DateOnly.Parse(Context.Session.GetString("InputDate"));
+    var inputTime = TimeOnly.Parse(Context.Session.GetString("InputTime"));
+}
+@*<p>InputVehicle: @inputVehicle</p>
+<p>InputFrom: @inputFrom</p>
+<p>InputTo: @inputTo</p>
+<p>InputDate: @inputDate</p>
+<p>InputTime: @inputTime</p>*@
+
+@{
+    bool empty = true;
+
+    if(Model != null && Model.RouteInstances != null)
+    {
+        for(int i = 0; i < Model.RouteInstances.Count; i++)
+        {
+            if (Model.RouteInstances[i].Route.Vehicle.VehicleType == @inputVehicle &&
+                Model.RouteInstances[i].Date >= @inputDate &&
+                //Model.RouteInstances[i].DepartureTime >= @inputTime &&
+                Model.RouteInstances[i].Route.CityFrom.Name == @inputFrom &&
+                Model.RouteInstances[i].Route.CityTo.Name == @inputTo)
+            {
+                if(inputVehicle == "Letadlo")
+                {
+                    //Shows 1 future month
+                    if (Model.RouteInstances[i].Date <= inputDate.AddMonths(1) && Model.RouteInstances[i].DepartureTime >= @inputTime)
+                    {
+                        empty = false;
+                        <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50">
+                            <div class="row">
+                                <div class="col text-start">
+                                    <p>
+                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Letadlo")
+                                        {
+                                            <i class="bi bi-airplane"></i>
+                                        }
+                                        &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
+                                    </p>
+                                </div>
+                                <div class="col-5 mx-auto">
+                                    <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[1].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Koupit</button>
+                                </div>
+                            </div>
+                            <div>
+                                <p><b>Datum: &nbsp @Model.RouteInstances[i].Date</b></p>
+                            </div>
+                            <div>
+                                <p><b>Odlet: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                            </div>
+                            <div>
+                                <p><b>Přílet: &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                            </div>
+                            <div class="row">
+                                <div class="col text-start">
+                                    <p><b>Celkový čas: &nbsp @Model.RouteInstances[i].TravelTime.Hours hod @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <p><b>Cena: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {   //Shows 1 future day
+                    if (Model.RouteInstances[i].Date == @inputDate && Model.RouteInstances[i].DepartureTime >= @inputTime)
+                    {
+                        empty = false;
+                        <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50">
+                            <div class="row">
+                                <div class="col text-start">
+                                    <p>
+                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Autobus")
+                                        {
+                                            <i class="bi bi-bus-front"></i>
+                                        }
+                                        else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Vlak")
+                                        {
+                                            <i class="bi bi-train-front"></i>
+                                        }
+                                        &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
+                                    </p>
+                                </div>
+                                <div class="col-5 mx-auto">
+                                    <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[1].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Koupit</button>
+                                </div>
+                            </div>
+                            <div>
+                                <p><b>Datum: &nbsp @Model.RouteInstances[i].Date</b></p>
+                            </div>
+                            <div>
+                                <p><b>Odjezd: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                            </div>
+                            <div>
+                                <p><b>Příjezd: &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                            </div>
+                            <div class="row">
+                                <div class="col text-start">
+                                    <p><b>Celkový čas: &nbsp @Model.RouteInstances[i].TravelTime.Hours hod @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <p><b>Cena: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.RouteInstances[i].Date == @inputDate.AddDays(1) && Model.RouteInstances[i].DepartureTime <= @inputTime)
+                    {
+                        empty = false;
+                        <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50">
+                            <div class="row">
+                                <div class="col text-start">
+                                    <p>
+                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Autobus")
+                                        {
+                                            <i class="bi bi-bus-front"></i>
+                                        }
+                                        else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Vlak")
+                                        {
+                                            <i class="bi bi-train-front"></i>
+                                        }
+                                        &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
+                                    </p>
+                                </div>
+                                <div class="col-5 mx-auto">
+                                    <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[1].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Koupit</button>
+                                </div>
+                            </div>
+                            <div>
+                                <p><b>Datum: &nbsp @Model.RouteInstances[i].Date</b></p>
+                            </div>
+                            <div>
+                                <p><b>Odjezd: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                            </div>
+                            <div>
+                                <p><b>Příjezd: &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                            </div>
+                            <div class="row">
+                                <div class="col text-start">
+                                    <p><b>Celkový čas: &nbsp @Model.RouteInstances[i].TravelTime.Hours hod @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <p><b>Cena: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }    
+    }
+    if (empty)
+    {
+        <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50 text-center">
+            <div>
+                <p><b>Nic tady není.</b></p>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary buttonBack">Zpět</button>
+            </div>
+        </div>
+    }
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+@section Scripts
+    {
+    <environment include="Development">
+        <script src="~/js/buttonBack.js"></script>
+    </environment>
+    <environment include="Development">
+        <script src="~/js/routeInstance.js"></script>
+    </environment>
+}

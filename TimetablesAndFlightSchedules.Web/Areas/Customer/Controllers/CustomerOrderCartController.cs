@@ -4,6 +4,7 @@ using TimetablesAndFlightSchedules.Application.Abstraction;
 using TimetablesAndFlightSchedules.Infrastructure.Identity.Enums;
 using TimetablesAndFlightSchedules.Infrastructure.Identity;
 using TimetablesAndFlightSchedules.Web.Controllers;
+using TimetablesAndFlightSchedules.Domain.Entities;
 
 namespace TimetablesAndFlightSchedules.Web.Areas.Customer.Controllers
 {
@@ -26,11 +27,11 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Customer.Controllers
 
 
         [HttpPost]
-        public double AddOrderItemsToSession(int? productId)
+        public double AddOrderItemsToSession(int? routeInstanceId)
         {
             if (HttpContext.Session != null && HttpContext.Session.IsAvailable)
             {
-                return orderCartService.AddOrderItemsToSession(productId, this.HttpContext.Session);
+                return orderCartService.AddOrderItemsToSession(routeInstanceId, this.HttpContext.Session);
             }
 
             return 0;

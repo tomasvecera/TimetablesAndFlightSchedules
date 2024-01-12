@@ -11,9 +11,9 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 {
     public class HomeDFakeService : IHomeService
     {
-        public RouteVehicleCityViewModel GetHomeViewModel()
+        public RouteVehicleCityRouteInstanceViewModel GetHomeViewModel()
         {
-            RouteVehicleCityViewModel viewModel = new RouteVehicleCityViewModel();
+            RouteVehicleCityRouteInstanceViewModel viewModel = new RouteVehicleCityRouteInstanceViewModel();
 
             viewModel.Vehicles = DatabaseFake.Vehicles;
             viewModel.Cities = DatabaseFake.Cities;
