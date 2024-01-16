@@ -36,7 +36,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                 City? cityF = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == route.CityFromID);
                 City? cityT = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == route.CityToID);
                 Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == route.VehicleID);
-                route.RouteName = cityF.Name + ", " + cityT.Name + "; " + vehicle.VehicleType;
+                route.RouteName = cityF.Name + "; " + cityT.Name + "; " + vehicle.VehicleType;
 
                 bool contains = false;
                 foreach (Route r in _timetablesAndFlightSchedulesDbContext.Routes)
@@ -51,15 +51,6 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                     _timetablesAndFlightSchedulesDbContext.Routes.Add(route);
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
-
-
-                //City? cityF = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == route.CityFromID);
-                //City? cityT = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == route.CityToID);
-                //Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == route.VehicleID);
-                //route.RouteName = cityF.Name + ", " + cityT.Name + "; " + vehicle.VehicleType;
-
-                //_timetablesAndFlightSchedulesDbContext.Routes.Add(route);
-                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 
@@ -108,27 +99,10 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                     route.VehicleID = routeUpdated.VehicleID;
                     route.PriceOfTicket = routeUpdated.PriceOfTicket;
 
-                    //City? cityF = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == routeUpdated.CityFromID);
-                    //City? cityT = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == routeUpdated.CityToID);
-                    //Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == route.VehicleID);
-                    //route.RouteName = cityF.Name + ", " + cityT.Name + "; " + vehicle.VehicleType;
                     route.RouteName = routeUpdated.RouteName;
 
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
-
-
-                /*route.CityFromID = routeUpdated.CityFromID;
-                route.CityToID = routeUpdated.CityToID;
-                route.VehicleID = routeUpdated.VehicleID;
-                route.PriceOfTicket = routeUpdated.PriceOfTicket;
-
-                City? cityF = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == routeUpdated.CityFromID);
-                City? cityT = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(c => c.Id == routeUpdated.CityToID);
-                Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == route.VehicleID);
-                route.RouteName = cityF.Name + ", " + cityT.Name + "; " + vehicle.VehicleType;
-
-                _timetablesAndFlightSchedulesDbContext.SaveChanges();*/
             }
         }
     }

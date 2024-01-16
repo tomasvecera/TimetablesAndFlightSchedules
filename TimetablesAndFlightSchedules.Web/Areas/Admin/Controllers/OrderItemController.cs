@@ -87,7 +87,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
             {
                 return View(orderItem);
             }
-            //return RedirectToAction(nameof(RouteController.Index));
         }
 
         void SetOrderAndRouteInstanceSelectLists()

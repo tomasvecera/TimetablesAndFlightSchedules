@@ -24,7 +24,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             return _timetablesAndFlightSchedulesDbContext.Cities.ToList();
         }
 
-        public void Create(City city)
+        public Task Create(City city)
         {
             if (_timetablesAndFlightSchedulesDbContext.Cities != null)
             {
@@ -42,6 +42,8 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         public bool Delete(int id)
@@ -81,11 +83,6 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                     city.Name = cityUpdated.Name;
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
-
-
-                //city.Name = cityUpdated.Name;
-
-                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 

@@ -39,8 +39,8 @@
                             <td>@Model[i].Vehicle.Id</td>
                             <td>@Model[i].Vehicle.VehicleType</td>
                             <td>@Model[i].PriceOfTicket</td>
-                            <td><a asp-action="Delete" asp-route-Id="@Model[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
-                            <td><a asp-action="Edit" asp-route-Id="@Model[i].Id">Edit</a></td>
+                            <td><a type="button" class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-Id="@Model[i].Id" onclick="return ConfirmDelete();">Delete</a></td>
+                            <td><a type="button" class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-Id="@Model[i].Id">Edit</a></td>
                         </tr>
                     }
                 </tbody>

@@ -74,6 +74,8 @@ builder.Services.AddScoped<IOrderCartService, OrderCartService>();
 builder.Services.AddScoped<IOrderCustomerService, OrderCustomerService>();
 
 
+//builder.Services.AddScoped<ICustomerCartService, CustomerCartService>();
+
 
 builder.Services.AddScoped<IRouteAdminService, RouteAdminService>();
 builder.Services.AddScoped<IRouteInstanceAdminService, RouteInstanceAdminService>();

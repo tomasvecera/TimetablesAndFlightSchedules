@@ -14,33 +14,13 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TimetablesAndFlightSchedules.Web</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Timetables & Flight Schedules</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" id="navbarDropdownCustomer" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Orders</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCustomer">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item text-dark" asp-area="Customer" asp-controller="CustomerOrders" asp-action="Index">My Orders</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="dropdown-item text-dark" asp-area="Customer" asp-controller="CustomerOrderCart" asp-action="ApproveOrderInSession">Approve Current Order</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
                         @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.Manager))))
                         {
                             <li class="nav-item dropdown">
@@ -57,38 +37,42 @@
                             </li>
                         }
                     </ul>
-                    <ul class="navbar-nav navbar-right">
-                        @{
-                            double totalPrice = 0;
-                            string totalPriceString = "TotalPrice";
-                            if (Context.Session != null && Context.Session.IsAvailable && Context.Session.Keys.Contains(totalPriceString))
-                            {
-                                totalPrice = Context.Session.GetDouble(totalPriceString).GetValueOrDefault();
-                            }
-                            <li class="navbar-text"><a id="total_price" class="label" style="color:red;">@totalPrice.ToString("C2")</a></li>
-                        }
-                    </ul>
-                @*</div>*@
-                @{
-                    @if (User.Identity.IsAuthenticated == false)
+                    @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
                     {
                         <ul class="navbar-nav navbar-right">
-                            <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Register"><i class="bi bi-person-plus"></i> Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Login"><i class="bi bi-unlock"></i> Login</a></li>
+                            @{
+                                double totalPrice = 0;
+                                string totalPriceString = "TotalPrice";
+                                if (Context.Session != null && Context.Session.IsAvailable && Context.Session.Keys.Contains(totalPriceString))
+                                {
+                                    totalPrice = Context.Session.GetDouble(totalPriceString).GetValueOrDefault();
+                                }
+                                <li class="navbar-text"><a class="btn btn-primary px-4 text-white" asp-area="Customer" asp-controller="CustomerOrderCart" asp-action="Index"><i class="bi bi-cart3"></i></a></li>
+                                <li class="navbar-text p-3"><a id="total_price">@totalPrice.ToString("C2")</a></li>
+                            }
                         </ul>
                     }
-                    else
-                    {
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item text-dark" asp-area="Security" asp-controller="Account" asp-action="Logout"><i class="bi bi-person-slash me-1"></i> Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    @{
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <ul class="navbar-nav navbar-right">
+                                <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Register"><i class="bi bi-person-plus"></i> Sign Up</a></li>
+                                <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Login"><i class="bi bi-unlock"></i> Login</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item text-dark" asp-area="Security" asp-controller="Account" asp-action="Logout"><i class="bi bi-person-slash me-1"></i> Logout</a></li>
+                                        <li><a class="dropdown-item text-dark" asp-area="Customer" asp-controller="CustomerOrders" asp-action="Index"><i class="bi bi-clock-history"></i> Order history</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
                     }
-                }
                 </div>
             </div>
         </nav>
@@ -99,11 +83,6 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-light">
-        <div class="container ">
-            &copy; 2023 - TimetablesAndFlightSchedules.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

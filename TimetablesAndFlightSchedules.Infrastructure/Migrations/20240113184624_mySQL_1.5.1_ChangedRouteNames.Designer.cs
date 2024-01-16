@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetablesAndFlightSchedules.Infrastructure.Database;
 
@@ -10,9 +11,11 @@ using TimetablesAndFlightSchedules.Infrastructure.Database;
 namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
 {
     [DbContext(typeof(TimetablesAndFlightSchedulesDbContext))]
-    partial class TimetablesAndFlightSchedulesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240113184624_mySQL_1.5.1_ChangedRouteNames")]
+    partial class mySQL_151_ChangedRouteNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

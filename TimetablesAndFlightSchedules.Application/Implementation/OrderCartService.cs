@@ -23,15 +23,13 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
-
         public double AddOrderItemsToSession(int? routeInstanceId, ISession session)
         {
             //get total price from session
             double totalPrice = session.GetDouble(totalPriceString).GetValueOrDefault();
 
-
             //get route instance which should be added to cart/session
-            RouteInstance? routeInstance = _timetablesAndFlightSchedulesDbContext.RouteInstances.FirstOrDefault(rout => rout.Id == routeInstanceId);
+            RouteInstance? routeInstance = _timetablesAndFlightSchedulesDbContext.RouteInstances.FirstOrDefault(ri => ri.Id == routeInstanceId);
             Route? route = _timetablesAndFlightSchedulesDbContext.Routes.FirstOrDefault(r => r.Id == routeInstance.RouteID);
 
             if (routeInstance != null)
@@ -47,7 +45,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 
 
                 //if there is order item with RouteInstanceID, increase amount and price, otherwise, add new OrderItem
-                if (orderItemInSession != null)
+                if (orderItemInSession != null )//&& orderItemInSession.RouteInstance.RouteInstanceName == routeInstance.RouteInstanceName)
                 {
                     ++orderItemInSession.Amount;
                     orderItemInSession.Price += route.PriceOfTicket;
@@ -77,7 +75,6 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             //return total price
             return totalPrice;
         }
-
 
         public bool ApproveOrderInSession(int userId, ISession session)
         {
@@ -134,5 +131,26 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             return false;
         }
 
+        public IList<OrderItem> GetUserOrderItems(ISession session)
+        {
+            IList<OrderItem> orderItems = session.GetObject<List<OrderItem>>(orderItemsString);
+
+            return orderItems;
+        }
+
+        public bool RemoveOrderInSession(int userId, ISession session)
+        {
+            //get order items from the session
+            List<OrderItem> orderItems = session.GetObject<List<OrderItem>>(orderItemsString);
+            if (orderItems != null)
+            {
+                session.Remove(orderItemsString);
+                session.Remove(totalPriceString);
+
+                return true;
+
+            }
+            return false;
+        }
     }
 }

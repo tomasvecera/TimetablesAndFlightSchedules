@@ -44,15 +44,10 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                 }
                 if (!contains)
                 {
+                    routeInstance.TravelTime = routeInstance.ArrivalTime - routeInstance.DepartureTime;
                     _timetablesAndFlightSchedulesDbContext.RouteInstances.Add(routeInstance);
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
-
-
-                //routeInstance.TravelTime = routeInstance.ArrivalTime - routeInstance.DepartureTime;
-
-                //_timetablesAndFlightSchedulesDbContext.RouteInstances.Add(routeInstance);
-                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 
@@ -100,13 +95,10 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                     routeInstance.ArrivalTime = routeInstanceUpdated.ArrivalTime;
                     routeInstance.TravelTime = routeInstanceUpdated.ArrivalTime - routeInstanceUpdated.DepartureTime;
 
-                    //Route? route = _timetablesAndFlightSchedulesDbContext.Routes.FirstOrDefault(r => r.Id == routeInstanceUpdated.RouteID);
-                    //routeInstance.RouteInstanceName = route.RouteName + "; " + routeInstanceUpdated.Date + "; " + routeInstanceUpdated.DepartureTime + "; " + routeInstanceUpdated.ArrivalTime;
                     routeInstance.RouteInstanceName = routeInstanceUpdated.RouteInstanceName;
 
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
-                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 

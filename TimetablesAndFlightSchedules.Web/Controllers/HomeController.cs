@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TimetablesAndFlightSchedules.Application.Abstraction;
 using TimetablesAndFlightSchedules.Application.ViewModels;
@@ -36,9 +37,9 @@ namespace TimetablesAndFlightSchedules.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Submit(string vehicle, string from, string to, DateOnly date, TimeOnly time)
+        public IActionResult Submit(string vehicle, string from, string to, DateOnly date, TimeOnly time, string changes)
         {
-            if(vehicle == null || from == null || to == null || date == null || time == null)
+            if (vehicle == null || from == null || to == null || date == null || time == null)
             {
                 return RedirectToAction(nameof(HomeController.Index));
             }
@@ -48,6 +49,14 @@ namespace TimetablesAndFlightSchedules.Web.Controllers
             HttpContext.Session.SetString("InputTo", to);
             HttpContext.Session.SetString("InputDate", date.ToString("dd-MM-yyyy"));
             HttpContext.Session.SetString("InputTime", time.ToString("HH:mm"));
+            if(changes == null)
+            {
+                HttpContext.Session.SetString("InputChanges", "off");
+            }
+            else
+            {
+                HttpContext.Session.SetString("InputChanges", changes);
+            }
             
             return RedirectToAction(nameof(HomeController.Results));
         }
@@ -59,6 +68,7 @@ namespace TimetablesAndFlightSchedules.Web.Controllers
             string inputTo = HttpContext.Session.GetString("InputTo");
             string inputDate = HttpContext.Session.GetString("InputDate");
             string inputTime = HttpContext.Session.GetString("InputTime");
+            string inputChanges = HttpContext.Session.GetString("InputChanges");
 
             RouteVehicleCityRouteInstanceViewModel viewModel = _homeService.GetHomeViewModel();
             return View(viewModel);

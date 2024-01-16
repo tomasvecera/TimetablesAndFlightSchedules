@@ -15,67 +15,26 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace TimetablesAndFlightSchedules.Infrastructure.Database
 {
     internal class DatabaseInit
-    {        
-        /*public IList<Ticket> GetTickets()
-        {
-            IList<Ticket> tickets = new List<Ticket>();
-            tickets.Add(new Ticket()
-            {
-                Id = 1,
-                TicketType = "Autobus classic Zlin Brno",
-                NumberOfTickets = 50,
-                Price = 45,
-            });
-            tickets.Add(new Ticket()
-            {
-                Id = 2,
-                TicketType = "Autobus classic Zlin Uherske Hradiste",
-                NumberOfTickets = 50,
-                Price = 20,
-            });
-            tickets.Add(new Ticket()
-            {
-                Id = 3,
-                TicketType = "Vlak classic Praha Brno",
-                NumberOfTickets = 150,
-                Price = 155,
-            });
-            tickets.Add(new Ticket()
-            {
-                Id = 4,
-                TicketType = "Vlak classic Zlin Brno",
-                NumberOfTickets = 150,
-                Price = 100,
-            });
-            tickets.Add(new Ticket()
-            {
-                Id = 5,
-                TicketType = "Letadlo A320 Praha Rim",
-                NumberOfTickets = 200,
-                Price = 2500,
-            });
-            return tickets;
-        }*/
-        
+    {
         public IList<Vehicle> GetVehicles()
         {
             IList<Vehicle> vehicles = new List<Vehicle>();
             vehicles.Add(new Vehicle()
             {
                 Id = 1,
-                VehicleType = "Autobus",
+                VehicleType = "Bus",
                 NumberOfTickets = 50,
             });
             vehicles.Add(new Vehicle()
             {
                 Id = 2,
-                VehicleType = "Vlak",
+                VehicleType = "Train",
                 NumberOfTickets = 100,
             });
             vehicles.Add(new Vehicle()
             {
                 Id = 3,
-                VehicleType = "Letadlo",
+                VehicleType = "Airplane",
                 NumberOfTickets = 200,
             });
             return vehicles;
@@ -122,7 +81,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 2,
                 PriceOfTicket = 120,
                 VehicleID = 1,
-                RouteName = "Zlin, Brno; Autobus",
+                RouteName = "Zlin; Brno; Bus",
             });
             routes.Add(new Route()
             {
@@ -131,7 +90,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 4,
                 PriceOfTicket = 350,
                 VehicleID = 2,
-                RouteName = "Brno, Praha; Vlak",
+                RouteName = "Brno; Praha; Train",
             });
             routes.Add(new Route()
             {
@@ -140,7 +99,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 1,
                 PriceOfTicket = 45,
                 VehicleID = 1,
-                RouteName = "Uherske Hradiste, Zlin; Autobus",
+                RouteName = "Uherske Hradiste; Zlin; Bus",
             });
             routes.Add(new Route()
             {
@@ -149,7 +108,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 CityToID = 5,
                 PriceOfTicket = 1500,
                 VehicleID = 3,
-                RouteName = "Praha, Rim; Letadlo",
+                RouteName = "Praha; Rim; Airplane",
             });
             return routes;
         }
@@ -166,7 +125,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(10, 00),
                 ArrivalTime = new TimeOnly(11, 30),
                 TravelTime = new TimeSpan(1, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 10:00; 11:30",
+                RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 10:00; 11:30",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -176,7 +135,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(13, 30),
                 ArrivalTime = new TimeOnly(15, 00),
                 TravelTime = new TimeSpan(1, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 13:30; 15:00",
+                RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 13:30; 15:00",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -186,7 +145,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(15, 30),
                 ArrivalTime = new TimeOnly(17, 00),
                 TravelTime = new TimeSpan(1, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 15:30; 17:00",
+                RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 15:30; 17:00",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -196,7 +155,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(16, 30),
                 ArrivalTime = new TimeOnly(18, 00),
                 TravelTime = new TimeSpan(1, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 16:30; 18:00",
+                RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 16:30; 18:00",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -206,7 +165,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(17, 00),
                 ArrivalTime = new TimeOnly(18, 30),
                 TravelTime = new TimeSpan(1, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 26.01.2024; 17:00; 18:30",
+                RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 17:00; 18:30",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -216,7 +175,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(15, 30),
                 ArrivalTime = new TimeOnly(17, 00),
                 TravelTime = new TimeSpan(1, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 27.01.2024; 15:30; 17:00",
+                RouteInstanceName = "Zlin; Brno; Bus; 27.01.2024; 15:30; 17:00",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -226,7 +185,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(15, 30),
                 ArrivalTime = new TimeOnly(17, 00),
                 TravelTime = new TimeSpan(1, 30, 0),
-                RouteInstanceName = "Zlin, Brno; Autobus; 28.01.2024; 15:30; 17:00",
+                RouteInstanceName = "Zlin; Brno; Bus; 28.01.2024; 15:30; 17:00",
             });
             // Train
             routeInstances.Add(new RouteInstance()
@@ -237,7 +196,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(10, 00),
                 ArrivalTime = new TimeOnly(12, 30),
                 TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 10:00; 12:30",
+                RouteInstanceName = "Brno; Praha; Train; 26.01.2024; 10:00; 12:30",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -247,7 +206,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(12, 00),
                 ArrivalTime = new TimeOnly(14, 30),
                 TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 12:00; 14:30",
+                RouteInstanceName = "Brno; Praha; Train; 26.01.2024; 12:00; 14:30",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -257,7 +216,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(14, 00),
                 ArrivalTime = new TimeOnly(16, 30),
                 TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Brno, Praha; Vlak; 26.01.2024; 14:00; 16:30",
+                RouteInstanceName = "Brno; Praha; Train; 26.01.2024; 14:00; 16:30",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -267,7 +226,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(12, 00),
                 ArrivalTime = new TimeOnly(14, 30),
                 TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Brno, Praha; Vlak; 27.01.2024; 12:00; 14:30",
+                RouteInstanceName = "Brno; Praha; Train; 27.01.2024; 12:00; 14:30",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -277,9 +236,9 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(12, 00),
                 ArrivalTime = new TimeOnly(14, 30),
                 TravelTime = new TimeSpan(2, 30, 0),
-                RouteInstanceName = "Brno, Praha; Vlak; 28.01.2024; 12:00; 14:30",
+                RouteInstanceName = "Brno; Praha; Train; 28.01.2024; 12:00; 14:30",
             });
-            // Airplain
+            // Airplane
             routeInstances.Add(new RouteInstance()
             {
                 Id = 13,
@@ -288,7 +247,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(12, 00),
                 ArrivalTime = new TimeOnly(14, 00),
                 TravelTime = new TimeSpan(2, 00, 0),
-                RouteInstanceName = "Praha, Rim; Letadlo; 26.01.2024; 12:00; 14:00",
+                RouteInstanceName = "Praha; Rim; Airplane; 26.01.2024; 12:00; 14:00",
             });
             routeInstances.Add(new RouteInstance()
             {
@@ -298,7 +257,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Database
                 DepartureTime = new TimeOnly(16, 00),
                 ArrivalTime = new TimeOnly(18, 00),
                 TravelTime = new TimeSpan(2, 00, 0),
-                RouteInstanceName = "Praha, Rim; Letadlo; 26.01.2024; 16:00; 18:00",
+                RouteInstanceName = "Praha; Rim; Airplane; 26.01.2024; 16:00; 18:00",
             });
             return routeInstances;
         }

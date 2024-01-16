@@ -21,7 +21,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 
         public IList<Order> GetOrdersForUser(int userId)
         {
-            return _timetablesAndFlightSchedulesDbContext.Orders.Where(or => or.UserId == userId)
+            return _timetablesAndFlightSchedulesDbContext.Orders.Where(o => o.UserId == userId)
                                                                 .Include(o => o.User)
                                                                 .Include(o => o.OrderItems)
                                                                 .ThenInclude(oi => oi.RouteInstance)

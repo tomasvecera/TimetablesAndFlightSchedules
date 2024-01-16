@@ -64,9 +64,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            //Vehicle? vehicle =
-            //    DatabaseFake.Vehicles.FirstOrDefault(vehicle => vehicle.Id == Id);
-
             Vehicle? vehicle = _timetablesAndFlightSchedulesDbContext.Vehicles.FirstOrDefault(v => v.Id == Id);
 
             return View(vehicle);

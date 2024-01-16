@@ -16,7 +16,7 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
             return DatabaseFake.Cities;
         }
 
-        public void Create(City city)
+        public async Task Create(City city)
         {
             if (DatabaseFake.Cities != null &&
                 DatabaseFake.Cities.Count > 0)
@@ -30,6 +30,8 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 
             if (DatabaseFake.Cities != null)
                 DatabaseFake.Cities.Add(city);
+
+            //return Task.CompletedTask;
         }
 
         public bool Delete(int id)

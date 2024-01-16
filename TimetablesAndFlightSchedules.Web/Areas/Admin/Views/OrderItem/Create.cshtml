@@ -8,12 +8,12 @@
 
     <form asp-action="Create" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <label class="form-label">@nameof(Order.OrderNumber)</label>
+            <label class="form-label">Order Number</label>
             <select asp-for="OrderID" class="form-control" asp-items="ViewBag.OrderID"></select>
             <span asp-validation-for="OrderID" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label class="form-label">@nameof(RouteInstance.RouteInstanceName)</label>
+            <label class="form-label">RouteInstance Name</label>
             <select asp-for="RouteInstanceID" class="form-control" asp-items="ViewBag.RouteInstanceID"></select>
             <span asp-validation-for="RouteInstanceID" class="text-danger"></span>
 

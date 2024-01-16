@@ -40,9 +40,6 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
                     _timetablesAndFlightSchedulesDbContext.Vehicles.Add(vehicle);
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
-
-                //_timetablesAndFlightSchedulesDbContext.Vehicles.Add(vehicle);
-                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 
@@ -86,11 +83,6 @@ namespace TimetablesAndFlightSchedules.Application.Implementation
 
                     _timetablesAndFlightSchedulesDbContext.SaveChanges();
                 }
-
-                //vehicle.VehicleType = vehicleUpdated.VehicleType;
-                //vehicle.NumberOfTickets = vehicleUpdated.NumberOfTickets;
-
-                //_timetablesAndFlightSchedulesDbContext.SaveChanges();
             }
         }
 

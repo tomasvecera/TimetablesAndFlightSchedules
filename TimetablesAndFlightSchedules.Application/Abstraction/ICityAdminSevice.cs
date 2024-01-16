@@ -11,7 +11,7 @@ namespace TimetablesAndFlightSchedules.Application.Abstraction
     {
         IList<City> Select();
 
-        void Create(City city);
+        Task Create(City city);
 
         bool Delete(int id);
 

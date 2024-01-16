@@ -69,8 +69,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            //Domain.Entities.Route? route =
-            //    DatabaseFake.Routes.FirstOrDefault(route => route.Id == Id);
             Domain.Entities.Route? route = _timetablesAndFlightSchedulesDbContext.Routes.FirstOrDefault(r => r.Id == Id);
 
             SetSelectLists();
@@ -91,9 +89,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
                 SetSelectLists();
                 return View(route);
             }
-
-            //_routeService.Edit(route);
-            //return RedirectToAction(nameof(RouteController.Index));
         }
         void SetSelectLists()
         {
@@ -103,8 +98,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
             ViewData[nameof(Domain.Entities.Route.CityFromID)] = new SelectList(citiesFrom, nameof(City.Id), nameof(City.Name));
             IList<City> citiesTo = _cityService.Select();
             ViewData[nameof(Domain.Entities.Route.CityToID)] = new SelectList(citiesTo, nameof(City.Id), nameof(City.Name));
-            //IList<Ticket> tickets = _ticketService.Select();
-            //ViewData[nameof(Domain.Entities.Route.TicketID)] = new SelectList(tickets, nameof(Ticket.Id), nameof(Ticket.Price));
         }
     }
 }

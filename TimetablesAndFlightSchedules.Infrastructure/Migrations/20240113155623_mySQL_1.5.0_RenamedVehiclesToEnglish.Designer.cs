@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetablesAndFlightSchedules.Infrastructure.Database;
 
@@ -10,9 +11,11 @@ using TimetablesAndFlightSchedules.Infrastructure.Database;
 namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
 {
     [DbContext(typeof(TimetablesAndFlightSchedulesDbContext))]
-    partial class TimetablesAndFlightSchedulesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240113155623_mySQL_1.5.0_RenamedVehiclesToEnglish")]
+    partial class mySQL_150_RenamedVehiclesToEnglish
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,7 +283,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             CityFromID = 1,
                             CityToID = 2,
                             PriceOfTicket = 120.0,
-                            RouteName = "Zlin; Brno; Bus",
+                            RouteName = "Zlin, Brno; Bus",
                             VehicleID = 1
                         },
                         new
@@ -289,7 +292,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             CityFromID = 2,
                             CityToID = 4,
                             PriceOfTicket = 350.0,
-                            RouteName = "Brno; Praha; Train",
+                            RouteName = "Brno, Praha; Train",
                             VehicleID = 2
                         },
                         new
@@ -298,7 +301,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             CityFromID = 3,
                             CityToID = 1,
                             PriceOfTicket = 45.0,
-                            RouteName = "Uherske Hradiste; Zlin; Bus",
+                            RouteName = "Uherske Hradiste, Zlin; Bus",
                             VehicleID = 1
                         },
                         new
@@ -307,7 +310,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             CityFromID = 4,
                             CityToID = 5,
                             PriceOfTicket = 1500.0,
-                            RouteName = "Praha; Rim; Airplane",
+                            RouteName = "Praha, Rim; Airplane",
                             VehicleID = 3
                         });
                 });
@@ -350,7 +353,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(10, 0, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 10:00; 11:30",
+                            RouteInstanceName = "Zlin, Brno; Bus; 26.01.2024; 10:00; 11:30",
                             TravelTime = new TimeSpan(0, 1, 30, 0, 0)
                         },
                         new
@@ -360,7 +363,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(13, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 13:30; 15:00",
+                            RouteInstanceName = "Zlin, Brno; Bus; 26.01.2024; 13:30; 15:00",
                             TravelTime = new TimeSpan(0, 1, 30, 0, 0)
                         },
                         new
@@ -370,7 +373,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(15, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 15:30; 17:00",
+                            RouteInstanceName = "Zlin, Brno; Bus; 26.01.2024; 15:30; 17:00",
                             TravelTime = new TimeSpan(0, 1, 30, 0, 0)
                         },
                         new
@@ -380,7 +383,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(16, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 16:30; 18:00",
+                            RouteInstanceName = "Zlin, Brno; Bus; 26.01.2024; 16:30; 18:00",
                             TravelTime = new TimeSpan(0, 1, 30, 0, 0)
                         },
                         new
@@ -390,7 +393,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(17, 0, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin; Brno; Bus; 26.01.2024; 17:00; 18:30",
+                            RouteInstanceName = "Zlin, Brno; Bus; 26.01.2024; 17:00; 18:30",
                             TravelTime = new TimeSpan(0, 1, 30, 0, 0)
                         },
                         new
@@ -400,7 +403,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 27),
                             DepartureTime = new TimeOnly(15, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin; Brno; Bus; 27.01.2024; 15:30; 17:00",
+                            RouteInstanceName = "Zlin, Brno; Bus; 27.01.2024; 15:30; 17:00",
                             TravelTime = new TimeSpan(0, 1, 30, 0, 0)
                         },
                         new
@@ -410,7 +413,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 28),
                             DepartureTime = new TimeOnly(15, 30, 0),
                             RouteID = 1,
-                            RouteInstanceName = "Zlin; Brno; Bus; 28.01.2024; 15:30; 17:00",
+                            RouteInstanceName = "Zlin, Brno; Bus; 28.01.2024; 15:30; 17:00",
                             TravelTime = new TimeSpan(0, 1, 30, 0, 0)
                         },
                         new
@@ -420,7 +423,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(10, 0, 0),
                             RouteID = 2,
-                            RouteInstanceName = "Brno; Praha; Train; 26.01.2024; 10:00; 12:30",
+                            RouteInstanceName = "Brno, Praha; Train; 26.01.2024; 10:00; 12:30",
                             TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
@@ -430,7 +433,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(12, 0, 0),
                             RouteID = 2,
-                            RouteInstanceName = "Brno; Praha; Train; 26.01.2024; 12:00; 14:30",
+                            RouteInstanceName = "Brno, Praha; Train; 26.01.2024; 12:00; 14:30",
                             TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
@@ -440,7 +443,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(14, 0, 0),
                             RouteID = 2,
-                            RouteInstanceName = "Brno; Praha; Train; 26.01.2024; 14:00; 16:30",
+                            RouteInstanceName = "Brno, Praha; Train; 26.01.2024; 14:00; 16:30",
                             TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
@@ -450,7 +453,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 27),
                             DepartureTime = new TimeOnly(12, 0, 0),
                             RouteID = 2,
-                            RouteInstanceName = "Brno; Praha; Train; 27.01.2024; 12:00; 14:30",
+                            RouteInstanceName = "Brno, Praha; Train; 27.01.2024; 12:00; 14:30",
                             TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
@@ -460,7 +463,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 28),
                             DepartureTime = new TimeOnly(12, 0, 0),
                             RouteID = 2,
-                            RouteInstanceName = "Brno; Praha; Train; 28.01.2024; 12:00; 14:30",
+                            RouteInstanceName = "Brno, Praha; Train; 28.01.2024; 12:00; 14:30",
                             TravelTime = new TimeSpan(0, 2, 30, 0, 0)
                         },
                         new
@@ -470,7 +473,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(12, 0, 0),
                             RouteID = 4,
-                            RouteInstanceName = "Praha; Rim; Airplane; 26.01.2024; 12:00; 14:00",
+                            RouteInstanceName = "Praha, Rim; Airplane; 26.01.2024; 12:00; 14:00",
                             TravelTime = new TimeSpan(0, 2, 0, 0, 0)
                         },
                         new
@@ -480,7 +483,7 @@ namespace TimetablesAndFlightSchedules.Infrastructure.Migrations
                             Date = new DateOnly(2024, 1, 26),
                             DepartureTime = new TimeOnly(16, 0, 0),
                             RouteID = 4,
-                            RouteInstanceName = "Praha; Rim; Airplane; 26.01.2024; 16:00; 18:00",
+                            RouteInstanceName = "Praha, Rim; Airplane; 26.01.2024; 16:00; 18:00",
                             TravelTime = new TimeSpan(0, 2, 0, 0, 0)
                         });
                 });

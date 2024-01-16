@@ -49,10 +49,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
                 SetRouteSelectLists();
                 return View(routeInstances);
             }
-
-            //_routeInstanceService.Create(routeInstances);
-
-            //return RedirectToAction(nameof(RouteInstanceController.Index));
         }
 
         public IActionResult Delete(int Id)
@@ -72,9 +68,6 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            //RouteInstance? routeInstance =
-            //    DatabaseFake.RouteInstances.FirstOrDefault(routeInstance => routeInstance.Id == Id);
-
             RouteInstance? routeInstance = _timetablesAndFlightSchedulesDbContext.RouteInstances.FirstOrDefault(ri => ri.Id == Id);
 
             SetRouteSelectLists();
@@ -94,16 +87,12 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
                 SetRouteSelectLists();
                 return View(routeInstance);
             }
-
-            //_routeInstanceService.Edit(routeInstance);
-            //return RedirectToAction(nameof(RouteInstanceController.Index));
         }
 
         void SetRouteSelectLists()
         {
             IList<Domain.Entities.Route> routes = _routeService.Select();
             ViewData[nameof(RouteInstance.RouteID)] = new SelectList(routes, nameof(Domain.Entities.Route.Id), nameof(Domain.Entities.Route.RouteName));
-
         }
     }
 }

@@ -10,27 +10,21 @@
     var inputTo = Context.Session.GetString("InputTo");
     var inputDate = DateOnly.Parse(Context.Session.GetString("InputDate"));
     var inputTime = TimeOnly.Parse(Context.Session.GetString("InputTime"));
+    var inputChanges = Context.Session.GetString("InputChanges");
 }
-@*<p>InputVehicle: @inputVehicle</p>
-<p>InputFrom: @inputFrom</p>
-<p>InputTo: @inputTo</p>
-<p>InputDate: @inputDate</p>
-<p>InputTime: @inputTime</p>*@
 
 @{
     bool empty = true;
-
     if(Model != null && Model.RouteInstances != null)
     {
         for(int i = 0; i < Model.RouteInstances.Count; i++)
         {
             if (Model.RouteInstances[i].Route.Vehicle.VehicleType == @inputVehicle &&
                 Model.RouteInstances[i].Date >= @inputDate &&
-                //Model.RouteInstances[i].DepartureTime >= @inputTime &&
                 Model.RouteInstances[i].Route.CityFrom.Name == @inputFrom &&
                 Model.RouteInstances[i].Route.CityTo.Name == @inputTo)
             {
-                if(inputVehicle == "Letadlo")
+                if (inputVehicle == "Airplane")
                 {
                     //Shows 1 future month
                     if (Model.RouteInstances[i].Date <= inputDate.AddMonths(1) && Model.RouteInstances[i].DepartureTime >= @inputTime)
@@ -40,32 +34,35 @@
                             <div class="row">
                                 <div class="col text-start">
                                     <p>
-                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Letadlo")
+                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Airplane")
                                         {
                                             <i class="bi bi-airplane"></i>
                                         }
                                         &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
                                     </p>
                                 </div>
-                                <div class="col-5 mx-auto">
-                                    <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[1].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Koupit</button>
-                                </div>
+                                @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
+                                {
+                                    <div class="col-5 mx-auto">
+                                        <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[i].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Buy</button>
+                                    </div>
+                                }
                             </div>
                             <div>
-                                <p><b>Datum: &nbsp @Model.RouteInstances[i].Date</b></p>
+                                <p><b>Date: &nbsp @Model.RouteInstances[i].Date</b></p>
                             </div>
                             <div>
-                                <p><b>Odlet: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                                <p><b>Departure: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
                             </div>
                             <div>
-                                <p><b>Přílet: &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                                <p><b>Arrival: &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
                             </div>
                             <div class="row">
                                 <div class="col text-start">
-                                    <p><b>Celkový čas: &nbsp @Model.RouteInstances[i].TravelTime.Hours hod @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
+                                    <p><b>Travel Time: &nbsp @Model.RouteInstances[i].TravelTime.Hours hour @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <p><b>Cena: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
+                                    <p><b>Price: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
                                 </div>
                             </div>
                         </div>
@@ -80,36 +77,39 @@
                             <div class="row">
                                 <div class="col text-start">
                                     <p>
-                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Autobus")
+                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Bus")
                                         {
                                             <i class="bi bi-bus-front"></i>
                                         }
-                                        else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Vlak")
+                                        else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Train")
                                         {
                                             <i class="bi bi-train-front"></i>
                                         }
                                         &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
                                     </p>
                                 </div>
-                                <div class="col-5 mx-auto">
-                                    <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[1].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Koupit</button>
-                                </div>
+                                @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
+                                {
+                                    <div class="col-5 mx-auto">
+                                        <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[i].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Buy</button>
+                                    </div>
+                                }
                             </div>
                             <div>
-                                <p><b>Datum: &nbsp @Model.RouteInstances[i].Date</b></p>
+                                <p><b>Date: &nbsp @Model.RouteInstances[i].Date</b></p>
                             </div>
                             <div>
-                                <p><b>Odjezd: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                                <p><b>Departure: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
                             </div>
                             <div>
-                                <p><b>Příjezd: &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                                <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
                             </div>
                             <div class="row">
                                 <div class="col text-start">
-                                    <p><b>Celkový čas: &nbsp @Model.RouteInstances[i].TravelTime.Hours hod @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
+                                    <p><b>Travel Time: &nbsp @Model.RouteInstances[i].TravelTime.Hours hour @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <p><b>Cena: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
+                                    <p><b>Price: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
                                 </div>
                             </div>
                         </div>
@@ -121,39 +121,212 @@
                             <div class="row">
                                 <div class="col text-start">
                                     <p>
-                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Autobus")
+                                        @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Bus")
                                         {
                                             <i class="bi bi-bus-front"></i>
                                         }
-                                        else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Vlak")
+                                        else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Train")
                                         {
                                             <i class="bi bi-train-front"></i>
                                         }
                                         &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
                                     </p>
                                 </div>
-                                <div class="col-5 mx-auto">
-                                    <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[1].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Koupit</button>
-                                </div>
+                                @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
+                                {
+                                    <div class="col-5 mx-auto">
+                                        <button type="submit" class="btn btn-primary btn-block" onclick="Buy(@Model.RouteInstances[i].Id,'@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Buy</button>
+                                    </div>
+                                }
                             </div>
                             <div>
-                                <p><b>Datum: &nbsp @Model.RouteInstances[i].Date</b></p>
+                                <p><b>Date: &nbsp @Model.RouteInstances[i].Date</b></p>
                             </div>
                             <div>
-                                <p><b>Odjezd: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                                <p><b>Departure: &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
                             </div>
                             <div>
-                                <p><b>Příjezd: &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                                <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
                             </div>
                             <div class="row">
                                 <div class="col text-start">
-                                    <p><b>Celkový čas: &nbsp @Model.RouteInstances[i].TravelTime.Hours hod @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
+                                    <p><b>Travel Time: &nbsp @Model.RouteInstances[i].TravelTime.Hours hour @Model.RouteInstances[i].TravelTime.Minutes min</b></p>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <p><b>Cena: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
+                                    <p><b>Price: &nbsp @Model.RouteInstances[i].Route.PriceOfTicket &nbsp Kč</b></p>
                                 </div>
                             </div>
                         </div>
+                    }
+                }
+            }
+            else if (@inputChanges == "on" &&
+                     Model.RouteInstances[i].Route.Vehicle.VehicleType == @inputVehicle &&
+                     Model.RouteInstances[i].Date >= @inputDate &&
+                     Model.RouteInstances[i].Route.CityFrom.Name == @inputFrom &&
+                     Model.RouteInstances[i].Route.CityTo.Name != @inputTo)
+            {
+                for (int j = 0; j < Model.RouteInstances.Count; j++)
+                {
+                    if (Model.RouteInstances[j].Route.Vehicle.VehicleType == @inputVehicle &&
+                        Model.RouteInstances[j].Date >= @inputDate &&
+                        Model.RouteInstances[j].Route.CityFrom.Name == Model.RouteInstances[i].Route.CityTo.Name &&
+                        Model.RouteInstances[j].Route.CityTo.Name == @inputTo &&
+                        Model.RouteInstances[j].DepartureTime >= Model.RouteInstances[i].ArrivalTime)
+                    {
+                        if (inputVehicle == "Airplane")
+                        {
+                            //Shows 1 future month
+                            if (Model.RouteInstances[i].Date <= inputDate.AddMonths(1) && Model.RouteInstances[i].DepartureTime >= @inputTime)
+                            {
+                                empty = false;
+                                <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50">
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            <p>
+                                                @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Airplane")
+                                                {
+                                                    <i class="bi bi-airplane"></i>
+                                                }
+                                                &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
+                                            </p>
+                                        </div>
+                                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
+                                        {
+                                            <div class="col-5 mx-auto">
+                                                <button type="submit" class="btn btn-primary btn-block" onclick="BuyTwice(@Model.RouteInstances[i].Id, @Model.RouteInstances[j].Id, '@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Buy</button>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div>
+                                        <p><b>Date: &nbsp @Model.RouteInstances[i].Date</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Departure: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Transfer Departure: &nbsp @Model.RouteInstances[j].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[j].Route.CityFrom.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[j].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[j].Route.CityTo.Name</b></p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            <p><b>Travel Time: &nbsp @(Model.RouteInstances[j].ArrivalTime.Hour - Model.RouteInstances[i].DepartureTime.Hour) hour @(Model.RouteInstances[j].ArrivalTime.Minute - Model.RouteInstances[i].DepartureTime.Minute) min</b></p>
+                                        </div>
+                                        <div class="col-5 text-center">
+                                            <p><b>Price: &nbsp @(Model.RouteInstances[i].Route.PriceOfTicket + Model.RouteInstances[j].Route.PriceOfTicket) &nbsp Kč</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            if (Model.RouteInstances[i].Date == @inputDate && Model.RouteInstances[i].DepartureTime >= @inputTime)
+                            {
+                                empty = false;
+                                <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50">
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            <p>
+                                                @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Bus")
+                                                {
+                                                    <i class="bi bi-bus-front"></i>
+                                                }
+                                                else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Train")
+                                                {
+                                                    <i class="bi bi-train-front"></i>
+                                                }
+                                                &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
+                                            </p>
+                                        </div>
+                                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
+                                        {
+                                            <div class="col-5 mx-auto">
+                                                <button type="submit" class="btn btn-primary btn-block" onclick="BuyTwice(@Model.RouteInstances[i].Id, @Model.RouteInstances[j].Id, '@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Buy</button>
+                                        </div>
+                                        }
+                                    </div>
+                                    <div>
+                                        <p><b>Date: &nbsp @Model.RouteInstances[i].Date</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Departure: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Transfer Departure: &nbsp @Model.RouteInstances[j].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[j].Route.CityFrom.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[j].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[j].Route.CityTo.Name</b></p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            <p><b>Travel Time: &nbsp @(Model.RouteInstances[j].ArrivalTime.Hour - Model.RouteInstances[i].DepartureTime.Hour) hour @(Model.RouteInstances[j].ArrivalTime.Minute - Model.RouteInstances[i].DepartureTime.Minute) min</b></p>
+                                        </div>
+                                        <div class="col-5 text-center">
+                                            <p><b>Price: &nbsp @(Model.RouteInstances[i].Route.PriceOfTicket + Model.RouteInstances[j].Route.PriceOfTicket) &nbsp Kč</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.RouteInstances[i].Date == @inputDate.AddDays(1) && Model.RouteInstances[i].DepartureTime <= @inputTime)
+                            {
+                                empty = false;
+                                <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50">
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            <p>
+                                                @if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Bus")
+                                                {
+                                                    <i class="bi bi-bus-front"></i>
+                                                }
+                                                else if (Model.RouteInstances[i].Route.Vehicle.VehicleType == "Train")
+                                                {
+                                                    <i class="bi bi-train-front"></i>
+                                                }
+                                                &nbsp<b>@Model.RouteInstances[i].Route.Vehicle.VehicleType</b>
+                                            </p>
+                                        </div>
+                                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Customer))))
+                                        {
+                                            <div class="col-5 mx-auto">
+                                                <button type="submit" class="btn btn-primary btn-block" onclick="BuyTwice(@Model.RouteInstances[i].Id, @Model.RouteInstances[j].Id, '@Url.Action(nameof(CustomerOrderCartController.AddOrderItemsToSession), nameof(CustomerOrderCartController).Replace(nameof(Controller), String.Empty), new { Area = nameof(TimetablesAndFlightSchedules.Web.Areas.Customer) })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')">Buy</button>
+                                        </div>
+                                        }
+                                    </div>
+                                    <div>
+                                        <p><b>Date: &nbsp @Model.RouteInstances[i].Date</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Departure: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityFrom.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[i].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[i].Route.CityTo.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Transfer Departure: &nbsp @Model.RouteInstances[j].DepartureTime &nbsp &nbsp &nbsp @Model.RouteInstances[j].Route.CityFrom.Name</b></p>
+                                    </div>
+                                    <div>
+                                        <p><b>Arrival: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp @Model.RouteInstances[j].ArrivalTime &nbsp &nbsp &nbsp @Model.RouteInstances[j].Route.CityTo.Name</b></p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            <p><b>Travel Time: &nbsp @(Model.RouteInstances[j].ArrivalTime.Hour - Model.RouteInstances[i].DepartureTime.Hour) hour @(Model.RouteInstances[j].ArrivalTime.Minute - Model.RouteInstances[i].DepartureTime.Minute) min</b></p>
+                                        </div>
+                                        <div class="col-5 text-center">
+                                            <p><b>Price: &nbsp @(Model.RouteInstances[i].Route.PriceOfTicket + Model.RouteInstances[j].Route.PriceOfTicket) &nbsp Kč</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
                     }
                 }
             }
@@ -163,10 +336,10 @@
     {
         <div class="container mt-5 mb-5 p-4 rounded bg-light border border-primary w-50 text-center">
             <div>
-                <p><b>Nic tady není.</b></p>
+                <p><b>There is nothing here</b></p>
             </div>
             <div>
-                <button type="button" class="btn btn-primary buttonBack">Zpět</button>
+                <button type="button" class="btn btn-primary buttonBack">Back</button>
             </div>
         </div>
     }

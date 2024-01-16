@@ -15,10 +15,10 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         ICityAdminService _cityService;
         TimetablesAndFlightSchedulesDbContext _timetablesAndFlightSchedulesDbContext;
 
-        public CityController(ICityAdminService cityService, TimetablesAndFlightSchedulesDbContext timetablesAndFlightSchedulesDbContext)
+        public CityController(ICityAdminService cityService/*, TimetablesAndFlightSchedulesDbContext timetablesAndFlightSchedulesDbContext*/)
         {
             _cityService = cityService;
-            _timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
+            //_timetablesAndFlightSchedulesDbContext = timetablesAndFlightSchedulesDbContext;
         }
 
         public IActionResult Index()
@@ -34,22 +34,17 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(City city)
+        public async Task<IActionResult> Create(City city)
         {
             if (ModelState.IsValid)
             {
-                _cityService.Create(city);
+                await _cityService.Create(city);
                 return RedirectToAction(nameof(CityController.Index));
             }
             else
             {
                 return View(city);
             }
-
-
-            //_cityService.Create(city);
-
-            //return RedirectToAction(nameof(RouteController.Index));
         }
 
         public IActionResult Delete(int Id)
@@ -71,9 +66,10 @@ namespace TimetablesAndFlightSchedules.Web.Areas.Admin.Controllers
         {
             //City? city =
             //    DatabaseFake.Cities.FirstOrDefault(city => city.Id == Id);
-            City? city = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(city => city.Id == Id);
+            //City? city = _timetablesAndFlightSchedulesDbContext.Cities.FirstOrDefault(city => city.Id == Id);
 
-            return View(city);
+            //return View(city);
+            return View();
         }
 
         [HttpPost]
